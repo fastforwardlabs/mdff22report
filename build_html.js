@@ -547,7 +547,7 @@ function makeJS() {
           if (window.innerWidth < 1028) {
             document.body.className = ''
           }
-          e.preventDefault() 
+          e.preventDefault()
         })
       }
 
@@ -571,19 +571,19 @@ function makeJS() {
 }
 
 function makeHead() {
-  let title = 'Structural Time Series'
+  let title = 'Session-Based Recommender Systems'
   let description =
-    'An online research report on structural time series by Cloudera Fast Forward.'
+    'An online research report on session-based recommender systems by Cloudera Fast Forward Labs.'
   return `<head>
 <meta charset="utf-8" />
 
 <title>${title}</title>
 <meta name="description" content="${description}" />
 
-<meta property="og:title" content="${title}" /> 
+<meta property="og:title" content="${title}" />
 <meta property="og:description" content="${description}" />
-<meta property="og:image" content="https://structural-time-series.fastforwardlabs.com/figures/ff16-cover-splash.png" />
-<meta property="og:url" content="https://structural-time-series.fastforwardlabs.com" />
+<meta property="og:image" content="https://session-based-recommendations.fastforwardlabs.com/figures/ff19-cover-splash.png" />
+<meta property="og:url" content="https://session-based-recommendations.fastforwardlabs.com" />
 <meta name="twitter:card" content="summary_large_image" />
 
 <meta name="viewport" content="width=device-width" />
@@ -606,7 +606,7 @@ ${makeJS()}
     document.getElementById('report-pdf-download').addEventListener('click', function() {
       ga('send', {
         hitType: 'pageview',
-        page: '//FF16-Structural_Time_Series-Cloudera_Fast_Forward.pdf'
+        page: '//FF19-Session_Based_Recommender_Systems-Cloudera_Fast_Forward.pdf'
       });
     });
   })
@@ -623,10 +623,10 @@ function wrap(content) {
       <body>
         <div class="content" style="position: relative;">
           <div id="html-logo" style="margin-top: ${line}px; line-height: 0; display: flex;">
-            <a href="https://www.cloudera.com/products/fast-forward-labs-research.html"><img alt="Cloudera Fast Forward" style="display: block; height: 14px; margin-bottom: 7px;" src='/figures/cloudera-fast-forward.png' /></a>
+            <a href="https://www.cloudera.com/products/fast-forward-labs-research.html"><img alt="Cloudera Fast Forward Labs" style="display: block; height: 14px; margin-bottom: 7px;" src='/figures/cloudera-fast-forward.png' /></a>
           </div>
           <div id="pdf-logo" style="margin-top: ${line}px; ">
-            <a href="https://www.cloudera.com/products/fast-forward-labs-research.html">Cloudera Fast Forward</a>
+            <a href="https://www.cloudera.com/products/fast-forward-labs-research.html">Cloudera Fast Forward Labs</a>
           </div>
           ${content}
         </div>

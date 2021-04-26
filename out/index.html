@@ -1,21 +1,21 @@
 <!DOCTYPE html>
     <html lang="en">
       <head>
-    <meta charset="utf-8" />
+<meta charset="utf-8" />
 
-    <title>Deep Learning for Anomaly Detection</title>
-    <meta name="description" content="TK" />
+<title>Session-Based Recommender Systems</title>
+<meta name="description" content="An online research report on session-based recommender systems by Cloudera Fast Forward Labs." />
 
-    <meta property="og:title" content="Deep Learning for Anomaly Detection" /> 
-    <meta property="og:description" content="TK" />
-    <meta property="og:image" content="https://experiments.fastforwardlabs.com/log/textflix-report/textflix-report-share.png" />
-    <meta property="og:url" content="https://experiments.fastforwardlabs.com/log/textflix-report" />
-    <meta name="twitter:card" content="summary_large_image" />
-    
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/x-icon" href="/static/images/favicon.png" />
-    
-    <style type="text/css">
+<meta property="og:title" content="Session-Based Recommender Systems" />
+<meta property="og:description" content="An online research report on session-based recommender systems by Cloudera Fast Forward Labs." />
+<meta property="og:image" content="https://session-based-recommendations.fastforwardlabs.com/figures/ff19-cover-splash.png" />
+<meta property="og:url" content="https://session-based-recommendations.fastforwardlabs.com" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<meta name="viewport" content="width=device-width" />
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+<style type="text/css">
     
   @font-face {
     font-family: 'Plex Mono';
@@ -77,8 +77,7 @@
       padding-left: 2ch;
       padding-right: 2ch;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
+      display: block;
       padding-bottom: 0px;
     }
    p, ul, ol {
@@ -93,7 +92,11 @@
     li p:first-child {
       text-indent: 0;
     }
- 
+
+    #pdf-logo {
+      display: none;
+    }
+
    hr {
       margin: 0;
       border-top-color: black;
@@ -117,7 +120,7 @@ h2 {
   font-size: 31.5px;
   line-height: 42px;
   font-weight: bold;
-  margin-top: 14px;
+  margin-top: 28px;
   margin-bottom: 14px;
 }
 h3 {
@@ -151,10 +154,16 @@ h6 {
 p {
   margin-bottom: 14px;
 }
+.content {
+  position: relative;
+  }
 figure {
   margin: 0;
   margin-top: 14px;
   margin-bottom: 28px;
+  display: block;
+  position: relative;
+  page-break-inside: avoid;
 }
 blockquote {
   margin: 0;
@@ -184,14 +193,58 @@ figcaption {
 }
 img {
   display: block;
+  position: relative;
   max-width: 100%;
   margin: 0 auto;
+  page-break-inside: avoid;
 }
-.debug > * {
-  outline: solid 1px green;
+code {
+  font-size: 0.9em;
+  line-height: 1.2;
+  background: rgba(0,0,0,0.125);
+  padding: 0 0.3em;
 }
-.debug {
-  background-position: 0 -0.5; position: absolute; top: 0; left: 0; width: 100%; height: 100000px; background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8bGluZSB4MT0iMCIgeTE9IjAuNSIgeDI9IjI4IiB5Mj0iMC41IiBzdHJva2U9ImxpZ2h0Ymx1ZSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGxpbmUgeDE9IjAiIHkxPSI3LjUiIHgyPSIyOCIgeTI9IjcuNSIgc3Ryb2tlPSJsaWdodGJsdWUiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSIwIiB5MT0iMTQuNSIgeDI9IjI4IiB5Mj0iMTQuNSIgc3Ryb2tlPSJsaWdodGJsdWUiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSIwIiB5MT0iMjEuNSIgeDI9IjI4IiB5Mj0iMjEuNSIgc3Ryb2tlPSJsaWdodGJsdWUiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=');
+pre {
+  font-size: 0.9em;
+  line-height: 1.2;
+  background: rgba(0,0,0,0.125);
+  overflow-x: scroll;
+  max-width: 100%;
+  padding-left: 1ch;
+  padding-right: 1ch;
+  padding-top:0.625em;
+  padding-bottom:0.625em;
+}
+pre code {
+  background: transparent;
+}
+
+table {
+  min-width: 100%;
+  text-align: left;
+  margin-top: 14px;
+  font-size: 13.125px;
+  line-height: 18.900000000000002px;
+  border-collapse: collapse;
+}
+table, th, td {
+  border: solid 1px black;
+}
+td {
+  padding-left: 0.5ch;
+  padding-right: 0.5ch;
+  valign: top;
+  vertical-align: top;
+}
+th {
+  padding-left: 0.5ch;
+  padding-right: 0.5ch;
+  vertical-align: top;
+  background: #efefef;
+}
+table ul, table ol {
+  list-style-position: inside;
+  padding-left: 0;
 }
 
   a {
@@ -215,26 +268,38 @@ img {
   p:empty {
     display: none;
   }
+  ul, ol {
+  margin-bottom: 14px;
+  }
+
+  #report-iso {
+    display: none;
+  }
 
 .table-of-contents {
     counter-reset: chapters;
 }
  .table-of-contents ul {
     list-style: none;
-    padding-left: 0
+    padding-left: 0;
+    margin-bottom: 0;
   }
-  .table-of-contents > ul > li > a:before {
-          counter-increment: chapters;
-          content: counter(chapters) ". ";
+ .table-of-contents > ul {
   }
  .table-of-contents > ul > li {
     font-weight: bold;
   }
+ .table-of-contents > ul > li {
+    font-weight: bold;
+   margin-bottom: 14px;
+  }
+
  .table-of-contents > ul > li > ul > li {
     font-weight: normal;
     font-style: normal;
     text-transform: none;
     letter-spacing: 0;
+    margin-left: 0;
   }
  .table-of-contents > ul > li > ul > li > ul > li {
     font-weight: normal;
@@ -250,9 +315,9 @@ img {
   }
   .table-of-contents ul a {
     display: block;
-    padding-left: 3ch;
-    text-indent: -1ch;
-    padding-right: 2ch;
+    padding-left: 24px;
+    text-indent: -8px;
+    padding-right: 16px;
   }
   .table-of-contents ul li a.active {
     position: relative;
@@ -261,14 +326,23 @@ img {
   }
 
  .table-of-contents > ul > li > ul > li > a {
-    padding-left: 4ch;
+    font-size: 15.75px;
+      line-height: 25.2px;
+    // padding-left: 4ch;
   }
   .table-of-contents > ul > li > ul > li > ul > li > a {
     padding-left: 5ch;
   }
 
-
-
+h1 {
+    counter-reset: chp;
+}
+h2 {
+  position: relative;
+  display: block;
+  page-break-before: always;
+  padding-top: 28px;
+}
   .toc-desktop-hidden .table-of-contents {
     width: auto;
   }
@@ -298,7 +372,7 @@ img {
       margin-left: 1ch;
       margin-right: 1ch;
     }
- 
+
   @media screen and (max-width: 1028px) {
     h1 {
       font-size: 36.75px;
@@ -308,18 +382,20 @@ img {
       margin-bottom: 14px;
     }
     .table-of-contents ul li {
-      padding-top: 3.5px;
-      padding-bottom: 3.5px;
     }
 
     #toc-header {
       margin-top: 7px;
       margin-bottom: 7px;
     }
- 
+
     body {
       padding-left: 0;
       padding-top: 42px;
+    }
+    .content {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
     #contents-label {
       display: none;
@@ -340,7 +416,7 @@ img {
       z-index: 2;
       border-top: solid 42px #aaa;
     }
- 
+
     .table-of-contents > ul {
       display: none;
     }
@@ -370,7 +446,7 @@ img {
   }
 }
 </style>
-    <script>
+<script>
     function inViewport(elem) {
       let bounding = elem.getBoundingClientRect();
       return (
@@ -390,7 +466,7 @@ img {
     }
 
     window.addEventListener("load", (event) => {
-      let headings = document.querySelectorAll('h1, h2, h3, h4');
+      let headings = document.querySelectorAll('h2, h3');
       let links = document.querySelectorAll('.table-of-contents ul li a')
 
       observer = new IntersectionObserver((entry, observer) => {
@@ -434,7 +510,7 @@ img {
       for (let link of links) {
         link.addEventListener('click', (e) => {
           let href = e.target.getAttribute('href')
-          let elem = document.querySelector(href)
+          let elem = document.getElementById(href.slice(1))
           window.scroll({
             top: elem.offsetTop - 28,
             left: 0,
@@ -443,7 +519,7 @@ img {
           if (window.innerWidth < 1028) {
             document.body.className = ''
           }
-          e.preventDefault() 
+          e.preventDefault()
         })
       }
 
@@ -465,21 +541,39 @@ img {
     }, false);
   </script>
 
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140718127-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  ga('create', 'UA-157475426-9', 'auto');
+  ga('send', 'pageview');
 
-      gtag('config', 'UA-140718127-1');
-    </script>
-  </head>
+  window.addEventListener('load', function() {
+    document.getElementById('report-pdf-download').addEventListener('click', function() {
+      ga('send', {
+        hitType: 'pageview',
+        page: '//FF19-Session_Based_Recommender_Systems-Cloudera_Fast_Forward.pdf'
+      });
+    });
+  })
+
+</script>
+<!-- End Google Analytics -->
+</head>
       <body>
-        <div class="content nodebug" style="position: relative;">
-          <div style="margin-top: 28px;"><a href="https://experiments.fastforwardlabs.com" >Cloudera Fast Forward</a></div>
-          <h1 id="deep-learning-for-anomaly-detection">Deep Learning for Anomaly Detection</h1>
+        <div class="content" style="position: relative;">
+          <div id="html-logo" style="margin-top: 28px; line-height: 0; display: flex;">
+            <a href="https://www.cloudera.com/products/fast-forward-labs-research.html"><img alt="Cloudera Fast Forward Labs" style="display: block; height: 14px; margin-bottom: 7px;" src='/figures/cloudera-fast-forward.png' /></a>
+          </div>
+          <div id="pdf-logo" style="margin-top: 28px; ">
+            <a href="https://www.cloudera.com/products/fast-forward-labs-research.html">Cloudera Fast Forward Labs</a>
+          </div>
+          <h1 id="session-based-recommender-systems">Session-Based Recommender Systems</h1>
+<p>FF19 · <em>May 2021</em></p>
+<figure><img src="figures/ff19-cover-splash.png" alt="Session-Based Recommender Systems report cover"><figcaption>Session-Based Recommender Systems report cover</figcaption></figure>
 <p><div class="table-of-contents"><div id="toc-header" style="display: flex; font-weight: bold; text-transform: uppercase;">
      <div><button id="toggle_contents" style="padding-left: 0.5ch; padding-right: 0.5ch; cursor: pointer; position: relative; top: -1px;">☰</button><span id="contents-label" style="margin-left: 0;"> Contents</span></div>
   </div><ul><li><a href="#example-formatting">Example formatting</a><ul><li><a href="#a-subheader">A subheader</a></li></ul></li><li><a href="#technical">Technical</a><ul><li><a href="#autoencoders">Autoencoders</a></li><li><a href="#modeling-normal-behaviour-and-anomaly-scoring">Modeling Normal Behaviour and Anomaly Scoring</a></li></ul></li></ul></div></p>
@@ -491,7 +585,7 @@ img {
 <p>Here is a sentence with a footnote.<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
 <p>A blockquote:</p>
 <blockquote>
-<p>“But Valley Girl is one of the few romance films I could sit through.”<br>
+<p>“But Valley Girl is one of the few romance films I could sit through.”
 – A review for <em>Valley Girl</em></p>
 </blockquote>
 <p>An info block (I will probably style this more later):</p>
@@ -499,10 +593,10 @@ img {
 <p>This is an info block.</p>
 </div>
 <h2 id="technical">Technical</h2>
-<p>As data becomes high dimensional, it is increasingly challenging to effectively learn a model of normal behaviour across variables within each model. In this chapter, we will review a set of relevant deep learning model architectures and how they can be applied to the task of anomaly detection. As discussed in the background  chapter, anomaly detection using each of these models  is explored as a function of how they can be applied first in modeling normal behaviour within data, and then generating an anomaly score.</p>
+<p>As data becomes high dimensional, it is increasingly challenging to effectively learn a model of normal behaviour across variables within each model. In this chapter, we will review a set of relevant deep learning model architectures and how they can be applied to the task of anomaly detection. As discussed in the background chapter, anomaly detection using each of these models is explored as a function of how they can be applied first in modeling normal behaviour within data, and then generating an anomaly score.</p>
 <p>The deep learning approaches discussed below typically consist of two important components - an encoder that learns to generate an internal representation of the input data, and a decoder which attempts to reconstruct the original input based on this internal representation. While the exact techniques for encoding and decoding vary across models, the overall benefit they offer is the ability to learn the distribution of normal input data and construct a measure of anomaly respectively.</p>
 <h3 id="autoencoders">Autoencoders</h3>
-<p>Autoencoders are neural networks designed to learn a low dimensional representation, given some input data. They consist of two components - an encoder  which learns to map input data to a low dimensional representation (termed the bottleneck), and a decoder which learns to map this low dimensional representation back to the original input data.  By structuring the learning problem in this manner, the encoder network learns an efficient  “compression” function which maps input data to a salient lower dimension representation, such that the decoder network is able to successfully reconstruct the original input data. The model is trained by minimizing the reconstruction error: the difference (mean squared error) between the original input and the reconstructed output produced by the decoder. In practice, autoencoders have been applied as a dimensionality reduction technique, as well as in other use cases -  such as noise removal from images, image colorization, unsupervised feature extraction, data compression, etc…</p>
+<p>Autoencoders are neural networks designed to learn a low dimensional representation, given some input data. They consist of two components - an encoder which learns to map input data to a low dimensional representation (termed the bottleneck), and a decoder which learns to map this low dimensional representation back to the original input data. By structuring the learning problem in this manner, the encoder network learns an efficient “compression” function which maps input data to a salient lower dimension representation, such that the decoder network is able to successfully reconstruct the original input data. The model is trained by minimizing the reconstruction error: the difference (mean squared error) between the original input and the reconstructed output produced by the decoder. In practice, autoencoders have been applied as a dimensionality reduction technique, as well as in other use cases - such as noise removal from images, image colorization, unsupervised feature extraction, data compression, etc…</p>
 <p>It is important to note that the mapping function learned by an autoencoder is specific to the training data distribution, i.e., an autoencoder will typically not succeed at reconstructing data which is significantly different from data it has seen during training. As we will see later in this section, this property of learning a distribution specific mapping (as opposed to a generic linear mapping) is particularly useful for the task of anomaly detection.</p>
 <figure><img src="figures/autoencoder.png" alt="An illustration of the components of an autoencoder"><figcaption>An illustration of the components of an autoencoder</figcaption></figure>
 <h3 id="modeling-normal-behaviour-and-anomaly-scoring">Modeling Normal Behaviour and Anomaly Scoring</h3>
@@ -517,5 +611,5 @@ img {
 
         </div>
       </body>
-    </html>
+   </html>
   

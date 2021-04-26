@@ -12,7 +12,7 @@ Here is a sentence with a footnote.^[This is the footnote.]
 
 A blockquote:
 
-> “But Valley Girl is one of the few romance films I could sit through.”  
+> “But Valley Girl is one of the few romance films I could sit through.”
 > -- A review for _Valley Girl_
 
 An info block (I will probably style this more later):
