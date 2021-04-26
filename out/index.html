@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+    <html lang="en">
+      <head>
+    <meta charset="utf-8" />
+
+    <title>Deep Learning for Anomaly Detection</title>
+    <meta name="description" content="TK" />
+
+    <meta property="og:title" content="Deep Learning for Anomaly Detection" /> 
+    <meta property="og:description" content="TK" />
+    <meta property="og:image" content="https://experiments.fastforwardlabs.com/log/textflix-report/textflix-report-share.png" />
+    <meta property="og:url" content="https://experiments.fastforwardlabs.com/log/textflix-report" />
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.png" />
+    
+    <style type="text/css">
+    
+  @font-face {
+    font-family: 'Plex Mono';
+    src: url('fonts/IBMPlexMono-Regular.woff2') format('woff2'),
+      url('fonts/IBMPlexMono-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Plex Mono';
+    src: url('fonts/IBMPlexMono-Italic.woff2') format('woff2'),
+      url('fonts/IBMPlexMono-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Plex Sans';
+    src: url('fonts/IBMPlexSans-Regular.woff2') format('woff2'),
+      url('fonts/IBMPlexSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Plex Sans';
+    src: url('fonts/IBMPlexSans-Italic.woff2') format('woff2'),
+      url('fonts/IBMPlexSans-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'Plex Sans';
+    src: url('fonts/IBMPlexSans-Bold.woff2') format('woff2'),
+      url('fonts/IBMPlexSans-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Plex Sans';
+    src: url('fonts/IBMPlexSans-BoldItalic.woff2') format('woff2'),
+      url('fonts/IBMPlexSans-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+  }
+  
+    * {
+      box-sizing: border-box;
+    }
+    html {
+      background: #fff;
+      font-family: "Plex Sans", serif, sans-serif;
+      font-size: 17.5px;
+      line-height: 28px;
+    }
+    body {
+      margin: 0;
+    }
+    .content {
+      max-width: 64ch;
+      padding-left: 2ch;
+      padding-right: 2ch;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 0px;
+    }
+   p, ul, ol {
+      margin: 0;
+    }
+    ul, ol {
+      padding-left: 3ch;
+    }
+  p {
+   // text-indent: 3ch;
+}
+    li p:first-child {
+      text-indent: 0;
+    }
+ 
+   hr {
+      margin: 0;
+      border-top-color: black;
+      margin-top: -0.5px;
+      margin-bottom: 27.5px;
+    }
+  
+h1, h2, h3, h4, h5, h6, button { font-size: inherit; line-height: inherit; font-style: inherit; font-weight: inherit; margin: 0; font-feature-settings: "tnum"; border: none; background: transparent; padding: 0;  }
+button:focus, button:hover {
+  background: rgba(0,0,0,0.125);
+  outline: none;
+}
+h1 {
+  font-size: 42px;
+  line-height: 56px;
+  font-weight: bold;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+h2 {
+  font-size: 31.5px;
+  line-height: 42px;
+  font-weight: bold;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+h3 {
+  font-size: 26.25px;
+  line-height: 35px;
+  font-weight: bold;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+h4 {
+  font-size: 21px;
+  line-height: 28px;
+  font-weight: bold;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+h5 {
+  font-size: 17.5px;
+  line-height: 28px;
+  margin-top: 14px;
+  margin-bottom: 14px;
+  font-weight: bold;
+}
+h6 {
+  font-size: 17.5px;
+  line-height: 28px;
+  margin-top: 14px;
+  margin-bottom: 14px;
+  font-style: italic;
+}
+p {
+  margin-bottom: 14px;
+}
+figure {
+  margin: 0;
+  margin-top: 14px;
+  margin-bottom: 28px;
+}
+blockquote {
+  margin: 0;
+   margin-top: 14px;
+  margin-bottom: 14px;
+margin-left: 2ch;
+}
+blockquote + blockquote {
+  margin-top: 0;
+}
+figcaption {
+  font-family: "Plex Mono", serif, monospace;
+  margin-top: 14px;
+  font-size: 13.125px;
+  line-height: 21px;
+}
+.info {
+  background: #efefef;
+  padding-left: 2ch;
+  padding-right: 2ch;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  margin-bottom: 28px;
+}
+.info p:last-child {
+  margin-bottom: 0;
+}
+img {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.debug > * {
+  outline: solid 1px green;
+}
+.debug {
+  background-position: 0 -0.5; position: absolute; top: 0; left: 0; width: 100%; height: 100000px; background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8bGluZSB4MT0iMCIgeTE9IjAuNSIgeDI9IjI4IiB5Mj0iMC41IiBzdHJva2U9ImxpZ2h0Ymx1ZSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGxpbmUgeDE9IjAiIHkxPSI3LjUiIHgyPSIyOCIgeTI9IjcuNSIgc3Ryb2tlPSJsaWdodGJsdWUiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSIwIiB5MT0iMTQuNSIgeDI9IjI4IiB5Mj0iMTQuNSIgc3Ryb2tlPSJsaWdodGJsdWUiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSIwIiB5MT0iMjEuNSIgeDI9IjI4IiB5Mj0iMjEuNSIgc3Ryb2tlPSJsaWdodGJsdWUiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=');
+}
+
+  a {
+    color: inherit;
+  }
+  .table-of-contents {
+    background: #efefef;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 32ch;
+    height: 100vh;
+    overflow-y: auto;
+    background: #efefef;
+      // background: rgba(230,230,230,0.85);
+      //   backdrop-filter: blur(5px);
+  }
+  body {
+    padding-left: 32ch;
+  }
+  p:empty {
+    display: none;
+  }
+
+.table-of-contents {
+    counter-reset: chapters;
+}
+ .table-of-contents ul {
+    list-style: none;
+    padding-left: 0
+  }
+  .table-of-contents > ul > li > a:before {
+          counter-increment: chapters;
+          content: counter(chapters) ". ";
+  }
+ .table-of-contents > ul > li {
+    font-weight: bold;
+  }
+ .table-of-contents > ul > li > ul > li {
+    font-weight: normal;
+    font-style: normal;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+ .table-of-contents > ul > li > ul > li > ul > li {
+    font-weight: normal;
+    font-style: italic;
+  }
+ .table-of-contents a {
+    text-decoration: none;
+  }
+  .table-of-contents a:hover {
+    text-decoration: underline;
+  }
+ sup {
+  }
+  .table-of-contents ul a {
+    display: block;
+    padding-left: 3ch;
+    text-indent: -1ch;
+    padding-right: 2ch;
+  }
+  .table-of-contents ul li a.active {
+    position: relative;
+    background: #ddd;
+    // text-decoration: line-through;
+  }
+
+ .table-of-contents > ul > li > ul > li > a {
+    padding-left: 4ch;
+  }
+  .table-of-contents > ul > li > ul > li > ul > li > a {
+    padding-left: 5ch;
+  }
+
+
+
+  .toc-desktop-hidden .table-of-contents {
+    width: auto;
+  }
+  .toc-desktop-hidden #contents-label {
+    display: none;
+  }
+  .toc-desktop-hidden .table-of-contents ul {
+    display: none;
+  }
+  body.toc-desktop-hidden {
+    padding-left: 5ch;
+  }
+  body:before {
+    content: " ";
+    height: 28px;
+    width: 96ch;
+    background: black;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    display: none;
+  }
+    #toc-header {
+      margin-top: 14px;
+      margin-bottom: 14px;
+      margin-left: 1ch;
+      margin-right: 1ch;
+    }
+ 
+  @media screen and (max-width: 1028px) {
+    h1 {
+      font-size: 36.75px;
+      line-height: 49px;
+      font-weight: bold;
+      margin-top: 14px;
+      margin-bottom: 14px;
+    }
+    .table-of-contents ul li {
+      padding-top: 3.5px;
+      padding-bottom: 3.5px;
+    }
+
+    #toc-header {
+      margin-top: 7px;
+      margin-bottom: 7px;
+    }
+ 
+    body {
+      padding-left: 0;
+      padding-top: 42px;
+    }
+    #contents-label {
+      display: none;
+    }
+    .table-of-contents {
+      height: auto;
+      width: 100%;
+      z-index: 3;
+    }
+  body.toc-mobile-show .content:before {
+      content: "";
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      background: rgba(0,0,0,0.25);
+      z-index: 2;
+      border-top: solid 42px #aaa;
+    }
+ 
+    .table-of-contents > ul {
+      display: none;
+    }
+   body.toc-mobile-show {
+      overflow: hidden;
+    }
+    body.toc-mobile-show #toc-header {
+      margin-top: 7px;
+      margin-bottom: 7px;
+      position: relative;
+    }
+    body.toc-mobile-show .table-of-contents {
+      width: 32ch;
+      height: 100vh;
+      max-width: calc(100% - 4ch);
+      overflow: auto;
+    }
+   body.toc-mobile-show .table-of-contents > ul {
+      display: block;
+      padding-bottom: 28px;
+      position: relative;
+    }
+    body.toc-mobile-show #contents-label {
+      display: inline;
+      position: relative;
+    }
+  }
+}
+</style>
+    <script>
+    function inViewport(elem) {
+      let bounding = elem.getBoundingClientRect();
+      return (
+        bounding.top >= 0 &&
+        bounding.left >= 0 &&
+        bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    };
+
+    function setActive(target_id) {
+      let selector = '.table-of-contents ul li a[href="#' + target_id + '"]'
+      let link = document.querySelector(selector)
+      if (link !== null) {
+        link.className = 'active'
+      }
+    }
+
+    window.addEventListener("load", (event) => {
+      let headings = document.querySelectorAll('h1, h2, h3, h4');
+      let links = document.querySelectorAll('.table-of-contents ul li a')
+
+      observer = new IntersectionObserver((entry, observer) => {
+        if (entry[0].intersectionRatio === 1) {
+          for (let link of links) {
+            link.className = ''
+          }
+          let target_id = entry[0].target.getAttribute('id')
+          setActive(target_id)
+        }
+      }, { threshold: 1, rootMargin: "0px 0px -50% 0px" });
+
+      let first = true
+      for (let heading of headings) {
+        if (first && inViewport(heading)) {
+          setActive(heading.getAttribute('id'))
+          first = false
+        }
+        observer.observe(heading);
+      }
+
+      document.querySelector('#toggle_contents').addEventListener('click', () => {
+        let body = document.body
+        if (window.innerWidth > 1027) {
+          let hidden_class = "toc-desktop-hidden"
+          if (body.className === hidden_class) {
+            body.className = ''
+          } else {
+            body.className = hidden_class
+          }
+        } else {
+          let show_class = "toc-mobile-show"
+          if (body.className === show_class) {
+            body.className = ''
+          } else {
+            body.className = show_class
+          }
+        }
+      })
+
+      for (let link of links) {
+        link.addEventListener('click', (e) => {
+          let href = e.target.getAttribute('href')
+          let elem = document.querySelector(href)
+          window.scroll({
+            top: elem.offsetTop - 28,
+            left: 0,
+            behavior: 'smooth'
+          })
+          if (window.innerWidth < 1028) {
+            document.body.className = ''
+          }
+          e.preventDefault() 
+        })
+      }
+
+      document.querySelector('.content').addEventListener('click', () => {
+        if (window.innerWidth < 1028) {
+          document.body.className = ''
+        }
+      })
+      document.querySelector('.table-of-contents').addEventListener('click', (e) => {
+        e.stopPropagation()
+      })
+
+      let mediaQueryList = window.matchMedia("(max-width: 1028px)");
+      function handleBreakpoint(mql) {
+        // clear any left over toggle classes
+        document.body.className = ''
+      }
+      mediaQueryList.addListener(handleBreakpoint);
+    }, false);
+  </script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140718127-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-140718127-1');
+    </script>
+  </head>
+      <body>
+        <div class="content nodebug" style="position: relative;">
+          <div style="margin-top: 28px;"><a href="https://experiments.fastforwardlabs.com" >Cloudera Fast Forward</a></div>
+          <h1 id="deep-learning-for-anomaly-detection">Deep Learning for Anomaly Detection</h1>
+<p><div class="table-of-contents"><div id="toc-header" style="display: flex; font-weight: bold; text-transform: uppercase;">
+     <div><button id="toggle_contents" style="padding-left: 0.5ch; padding-right: 0.5ch; cursor: pointer; position: relative; top: -1px;">☰</button><span id="contents-label" style="margin-left: 0;"> Contents</span></div>
+  </div><ul><li><a href="#example-formatting">Example formatting</a><ul><li><a href="#a-subheader">A subheader</a></li></ul></li><li><a href="#technical">Technical</a><ul><li><a href="#autoencoders">Autoencoders</a></li><li><a href="#modeling-normal-behaviour-and-anomaly-scoring">Modeling Normal Behaviour and Anomaly Scoring</a></li></ul></li></ul></div></p>
+<h2 id="example-formatting">Example formatting</h2>
+<p>A figure:</p>
+<figure><img src="figures/textflix-screenshot.png" alt="This caption has a link it it: The Textflix prototype"><figcaption>This caption has a link it it: <a href="https://textflix.fastforwardlabs.com">The Textflix prototype</a></figcaption></figure>
+<p>A link: <a href="https://textflix.fastforwardlabs.com">Textflix</a></p>
+<h3 id="a-subheader">A subheader</h3>
+<p>Here is a sentence with a footnote.<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<p>A blockquote:</p>
+<blockquote>
+<p>“But Valley Girl is one of the few romance films I could sit through.”<br>
+– A review for <em>Valley Girl</em></p>
+</blockquote>
+<p>An info block (I will probably style this more later):</p>
+<div class="info">
+<p>This is an info block.</p>
+</div>
+<h2 id="technical">Technical</h2>
+<p>As data becomes high dimensional, it is increasingly challenging to effectively learn a model of normal behaviour across variables within each model. In this chapter, we will review a set of relevant deep learning model architectures and how they can be applied to the task of anomaly detection. As discussed in the background  chapter, anomaly detection using each of these models  is explored as a function of how they can be applied first in modeling normal behaviour within data, and then generating an anomaly score.</p>
+<p>The deep learning approaches discussed below typically consist of two important components - an encoder that learns to generate an internal representation of the input data, and a decoder which attempts to reconstruct the original input based on this internal representation. While the exact techniques for encoding and decoding vary across models, the overall benefit they offer is the ability to learn the distribution of normal input data and construct a measure of anomaly respectively.</p>
+<h3 id="autoencoders">Autoencoders</h3>
+<p>Autoencoders are neural networks designed to learn a low dimensional representation, given some input data. They consist of two components - an encoder  which learns to map input data to a low dimensional representation (termed the bottleneck), and a decoder which learns to map this low dimensional representation back to the original input data.  By structuring the learning problem in this manner, the encoder network learns an efficient  “compression” function which maps input data to a salient lower dimension representation, such that the decoder network is able to successfully reconstruct the original input data. The model is trained by minimizing the reconstruction error: the difference (mean squared error) between the original input and the reconstructed output produced by the decoder. In practice, autoencoders have been applied as a dimensionality reduction technique, as well as in other use cases -  such as noise removal from images, image colorization, unsupervised feature extraction, data compression, etc…</p>
+<p>It is important to note that the mapping function learned by an autoencoder is specific to the training data distribution, i.e., an autoencoder will typically not succeed at reconstructing data which is significantly different from data it has seen during training. As we will see later in this section, this property of learning a distribution specific mapping (as opposed to a generic linear mapping) is particularly useful for the task of anomaly detection.</p>
+<figure><img src="figures/autoencoder.png" alt="An illustration of the components of an autoencoder"><figcaption>An illustration of the components of an autoencoder</figcaption></figure>
+<h3 id="modeling-normal-behaviour-and-anomaly-scoring">Modeling Normal Behaviour and Anomaly Scoring</h3>
+<p>Applying an autoencoder for anomaly detection follows the general principle of first modeling normal behaviour and subsequently generating an anomaly score for a new data sample. To model normal behaviour, we follow a semi-supervised approach where we train the autoencoder on a normal data sample. This way, the model learns a mapping function that successfully reconstructs normal data samples with a very small reconstruction error (the difference between actual sample and the version reconstructed by the model). This behaviour is replicated at test time, where the reconstruction error is small for normal data samples, and large for abnormal data samples. To identify anomalies, we use the reconstruction error score as an anomaly score and flag samples with reconstruction errors above a given threshold.</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>This is the footnote. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+        </div>
+      </body>
+    </html>
+  
