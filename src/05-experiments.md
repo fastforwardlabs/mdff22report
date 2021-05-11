@@ -32,7 +32,7 @@ Once we have our train/test/validation sets constructed, it’s time to train! T
 
 Under the hood, word2vec will construct a “vocabulary,” a collection of all unique product IDs, and then learn an embedding for each. Once trained, we can extract the product ID embeddings.
 
-[](figures/code_snippet.png)
+![](figures/code_snippet.png)
 
 Next, we need to generate recommendations. Given a query item, we’ll generate a handful of recommendations that are the most similar to that item, using cosine similarity. This is the same technique we would use if we wanted to find similar words. Instead of semantic similarity between words, we hope we have learned embeddings that capture the semantic similarity between product IDs that users purchased. Thus, we’ll look for other product IDs that are “most similar” to the query item.
 
@@ -69,8 +69,8 @@ The code snippet displayed above uses the default values for each of these hyper
 | Number of negative samples | 1 | 19 | 3 | 7 |
 | **Number of Trials** |  |  |  | 539 |
 
-#####[Table 1: This table shows the main hyperpar
-ameters we tuned over. For each one, we show the starting and ending values we tried, along with the step size we used. The total number of trials is computed by multiplying each value in the Configurations column.]
+[Table 1: This table shows the main hyperparameters we tuned over. For each one, we show the starting and ending values we tried, along with the 
+step size we used. The total number of trials is computed by multiplying each value in the Configurations column.]
 
 Above, we detail the hyperparameters we considered, the values we allowed these hyperparameters to assume, and the total number of trials necessary to test them all in a sweep. If we want to find the best hyperparameters for our dataset, we’ll need to do quite a bit of training—more than 500 different hyperparameter combinations!  We _could_ set up our own code, constructing several nested loops to cover all of the possible parameters—or perhaps we could use sklearn’s GridSearch. However, there’s an even better solution.
 
