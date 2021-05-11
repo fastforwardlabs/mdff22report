@@ -16,13 +16,13 @@ At a high level, content-based filtering makes recommendations based on user pre
 
 ![Figure 2: content-based vs collaborative filtering approaches](figures/FF19_Artboard_2.png)
 
-The underlying assumption in both of these systems is that all of the historical interactions are equally important to the user’s current preference—but in reality, this may not be true. A user’s choice of items not only depends not only on long-term historical preference, but also on short-term and more recent preferences. 
+The underlying assumption in both of these systems is that all of the historical interactions are equally important to the user’s current preference—but in reality, this may not be true. A user’s choice of items not only depends on long-term historical preference, but also on short-term and more recent preferences. 
 
 Choices almost always have time-sensitive context; for instance, “recently viewed” or “recently purchased” items may actually be more relevant than others. These short-term preferences are embedded in the user’s most recent interactions, but may account for only a small proportion of historical interactions. In addition, a user’s preference towards certain items can tend to be dynamic rather than static; it often evolves over time. 
 
 ![Figure 3: A user’s preference can change over time](figures/FF19_Artboard_3.png)
 
-These considerations have prompted the exploration and development of a new type of recommendation system: known as **session-based recommendation systems**, these systems rely heavily on the user’s most recent interactions, rather than on the user’s historical preferences. This is especially advantageous because a user _could_ appear anonymously—that is, a user may not be logged in or may be browsing incognito.  
+These considerations have prompted the exploration and development of a new class of recommendation algorithms: known as **session-based recommendation algorithms**, these rely heavily on the user’s most recent interactions, rather than on the user’s historical preferences. In addition, this approach is especially advantageous because a user _could_ appear anonymously—that is, a user may not be logged in or may be browsing incognito.  
 
 ### Why now?
 While nearly unknown as of just a few years ago, session-based recommenders have grown quickly in popularity, and for several reasons. First, this method can be implemented _even in the absence of historical user data_, and doesn’t explicitly rely on user population statistics. This is helpful because users aren’t always logged in when they browse a website, which makes session-based recommenders highly relevant.^[[Empirical Analysis of Session-Based Recommendation Algorithms](https://arxiv.org/abs/1910.12781)]
