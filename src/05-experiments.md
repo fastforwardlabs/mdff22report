@@ -22,7 +22,7 @@ To visualize this, let’s go back to Rhonda’s historical browsing information
 
 The item outside of the highlighted box (in this case, a “water bottle”) will be the ground truth item, and we’ll then check whether this item is contained within our generated recommendations.
 
-![Figure 12: Rhonda’s session, wherein the first *n*-1 items highlighted in a green box act as part of the training set, while the item outside is used as ground truth for the recommendations generated.](figures/FF19_Artboard 10.png)
+![Figure 12: Rhonda’s session, wherein the first *n*-1 items highlighted in a green box act as part of the training set, while the item outside is used as ground truth for the recommendations generated.](figures/FF19_Artboard_10.png)
 
 To put it more concretely: for each customer in the Online Retail Data Set, we construct the training set from the first n-1 purchased items. We construct test and validation sets as a series of [query item, ground truth item] pairs. The test and validation sets must be disjoint—that is, each set is composed of pairs with no pairs shared between the two sets (or else we would leak information from our validation into the final test set!).
 
@@ -36,11 +36,11 @@ Under the hood, word2vec will construct a “vocabulary,” a collection of all 
 
 Next, we need to generate recommendations. Given a query item, we’ll generate a handful of recommendations that are the most similar to that item, using cosine similarity. This is the same technique we would use if we wanted to find similar words. Instead of semantic similarity between words, we hope we have learned embeddings that capture the semantic similarity between product IDs that users purchased. Thus, we’ll look for other product IDs that are “most similar” to the query item.
 
-![Figure 13:  The query item (the last item in a training sequence) is used to generate K product recommendations](figures/FF19_Artboard 11.png)
+![Figure 13:  The query item (the last item in a training sequence) is used to generate K product recommendations](figures/FF19_Artboard_11.png)
 
 Armed with a list of recommendations, we can now score our model by checking whether the corresponding ground truth item is in our list of recommendations.
 
-![Figure 14: The user’s actual next selection (the final item in the user’s sequence) is considered the ground truth item, and we check whether that item is found in our list of generated recommendations.](figures/FF19_Artboard 12.png)
+![Figure 14: The user’s actual next selection (the final item in the user’s sequence) is considered the ground truth item, and we check whether that item is found in our list of generated recommendations.](figures/FF19_Artboard_12.png)
 
 We’ll perform this set of operations for each [query item, ground truth item] pair in our test set, to compute an overall score using Recall@*K* and MRR@*K*. The output of the code snippet above resulted in a Recall@10 of 19.7 and MRR@10 of 0.108. These results tell us that nearly 20% of the time, the user’s true selection was included in the list of recommendations we generated, and that its rank in that list was, on average, about 9th out of 10 recommendations. (1/x = 0.108 → x =  9.25)
 
@@ -63,7 +63,7 @@ In addition to the negative sampling exponent, another hyperparameter determines
 The code snippet displayed above uses the default values for each of these hyperparameters. These values were found to produce semantically meaningful representations for words in documents, but we are learning embeddings for products in online sessions. The order of products in online sessions will not have the same structure as words in sentences, so we’ll need to consider adjusting word2vec’s hyperparameters to be more appropriate to the task.
 
 | Hyperparameter | Start Value | End Value | Step Size | Configurations |
-| ------------- | ------------- |
+| ------ | ------ | ------ | ------ | ------ |
 | Context window size | 1 | 19 | 3 | 7 |
 | Negative sampling exponent | -1 | 1 | 0.2 | 11 |
 | Number of negative samples | 1 | 19 | 3 | 7 |

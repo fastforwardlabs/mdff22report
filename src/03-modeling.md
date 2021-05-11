@@ -13,7 +13,7 @@ Word2vec? Isn’t that the algorithm that made word embeddings commonplace? Yes!
 
 Given the central word “jumped,” the model will be able to predict the surrounding words: “The,” “cat,” “over,” “the,” “puddle.”
 
-![Figure 9: Word2vec versions: Skip-Gram vs Continuous Bag of Words](figures/FF19_Artboard 9.png)
+![Figure 9: Word2vec versions: Skip-Gram vs Continuous Bag of Words](figures/FF19_Artboard_9.png)
 
 Another approach—Continuous Bag of Words (CBOW)—treats the words “The,” “cat,” “over,” “the,” and “puddle” as the context, and predicts the center word: “jumped.” For the rest of this report, we will restrict ourselves to the skip-gram model. The Ws in the above diagram represent the weight matrices that control the weight of the successive transformations we apply to the input to get the output. Training this shallow network means learning the values of these weight matrices, which gives us the output that is closest to the training data. Once trained, the output layer is usually discarded, and the hidden layer (also known as the embeddings) is used for downstream processes. These embeddings are nothing but vector representations of each word, such that similar words have vector representations that are close together in the embedding space. 
 

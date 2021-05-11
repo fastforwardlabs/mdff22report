@@ -2,7 +2,7 @@
 
 Let’s say we own a popular online shopping website for workout accessories. Rhonda, a new customer, has been browsing tops, shoes, and weights. Her browsing history looks like this:
 
-![Figure 4:  Rhonda’s browsing history](figures/FF19_Artboard 4.png)
+![Figure 4:  Rhonda’s browsing history](figures/FF19_Artboard_4.png)
 
 What should we recommend to her next? Good recommendations increase the likelihood that Rhonda will see something she likes, click on it, and make a purchase. Poor recommendations will, at best, lead to no new revenue, but, even worse, could give her a negative customer experience. (You know this feeling: when a website keeps recommending something to you that you have already bought, or something that you’ve never really wanted, your impression of that website diminishes!) 
 
@@ -12,7 +12,7 @@ Our goal is to predict the product within Rhonda’s session that she will like 
 
 In reality, this means that our model might generate a handful of recommendations based on Rhonda’s browsing history; we want to maximize the likelihood that Rhonda clicks on at least one of them. To train a model for this task, we’ll need to use historical browsing sessions from our other existing users to identify trends between products that will help us learn recommendations. 
 
-![Figure 5: Historical browsing sessions of various lengths](figures/FF19_Artboard 5.png)
+![Figure 5: Historical browsing sessions of various lengths](figures/FF19_Artboard_5.png)
 
 We can frame the problem similarly for other use cases.
 
@@ -25,17 +25,17 @@ Recommending additional content that a user might like while they browse through
 
 The user’s listening queue follows a sequence. For each song the user has listened to in the past, we would want to identify the songs listened to directly before and after it, and use them to teach the machine learning model that those songs somehow belong to the same context. This allows us to find songs that are similar, and provide better recommendations.^[[Using Word2vec for Music Recommendations](https://towardsdatascience.com/using-word2vec-for-music-recommendations-bb9649ac2484)]
 
-![Figure 6: Playlist](figures/FF19_Artboard 6.png)
+![Figure 6: Playlist](figures/FF19_Artboard_6.png)
 
 #### Rental recommendations
 Another powerful and useful application of session-based recommendation systems occurs in any type of online marketplace. For example, imagine a website that contains millions of diverse rental listings, and a guest exploring them in search of a place to rent for a vacation.^[[Listing Embeddings in Search Ranking](https://medium.com/airbnb-engineering/listing-embeddings-for-similar-listing-recommendations-and-real-time-personalization-in-search-601172f7603e)] The machine learning model in such a situation should be able to leverage what the guest views during an ongoing search, and learn from these search sessions the similarities between the listings. The similarities learned by the model could potentially encode listing features, like location, price, amenities, design taste, and architecture.
 
-![Figure 7: Rental listings](figures/FF19_Artboard 7.png)
+![Figure 7: Rental listings](figures/FF19_Artboard_7.png)
 
 #### Product recommendations
 Leveraging emails in the forms of promotions and purchase receipts to recommend the next item to be purchased has also proven to be a strong purchase intent signal.^[[E-commerce in Your Inbox:
 Product Recommendations at Scale](https://arxiv.org/pdf/1606.07154.pdf) (PDF)] Again, the idea here is to learn a representation of products from historical sequences of product purchases, under the assumption that products with similar contexts (that is, surrounding purchases) can help recommend more meaningful and diverse suggestions for the next product a user might want to purchase.
 
-![Figure 8: Email purchase receipts](figures/FF19_Artboard 8.png)
+![Figure 8: Email purchase receipts](figures/FF19_Artboard_8.png)
 
 With these examples in mind, let’s dig deeper into what it takes to design and build a session-based recommendation system for product recommendations, in the context of an online retail website
