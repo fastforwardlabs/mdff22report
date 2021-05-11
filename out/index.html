@@ -597,25 +597,25 @@ h2 {
 <p>Third, session-based recommenders have benefited from the rise of deep learning approaches expressly suited for sequences (more on this in <a href="#modeling-session-based-recommenders">Modeling Session-based Recommenders</a>, below).</p>
 <h2 id="defining-the-session-based-recommender-problem-space">Defining the Session-based Recommender Problem Space</h2>
 <p>Let’s say we own a popular online shopping website for workout accessories. Rhonda, a new customer, has been browsing tops, shoes, and weights. Her browsing history looks like this:</p>
-<p>![Figure 4:  Rhonda’s browsing history](figures/FF19_Artboard 4.png)</p>
+<figure><img src="figures/FF19_Artboard_4.png" alt="Figure 4:  Rhonda’s browsing history"><figcaption>Figure 4:  Rhonda’s browsing history</figcaption></figure>
 <p>What should we recommend to her next? Good recommendations increase the likelihood that Rhonda will see something she likes, click on it, and make a purchase. Poor recommendations will, at best, lead to no new revenue, but, even worse, could give her a negative customer experience. (You know this feeling: when a website keeps recommending something to you that you have already bought, or something that you’ve never really wanted, your impression of that website diminishes!)</p>
 <p>We’ll consider Rhonda’s recent browsing history as a “session.” Formally, a session is composed of multiple user interactions that happen together in a continuous period of time—for instance, products purchased in a single transaction. Sessions can occur on the same day, or across several days, weeks, or months.</p>
 <p>Our goal is to predict the product within Rhonda’s session that she will like enough to click on. This task is called <strong>next event prediction</strong> (NEP): given a series of events (Rhonda’s browsing history), we want to predict the next event (Rhonda clicking on a product we recommend to her).</p>
 <p>In reality, this means that our model might generate a handful of recommendations based on Rhonda’s browsing history; we want to maximize the likelihood that Rhonda clicks on at least one of them. To train a model for this task, we’ll need to use historical browsing sessions from our other existing users to identify trends between products that will help us learn recommendations.</p>
-<p>![Figure 5: Historical browsing sessions of various lengths](figures/FF19_Artboard 5.png)</p>
+<figure><img src="figures/FF19_Artboard_5.png" alt="Figure 5: Historical browsing sessions of various lengths"><figcaption>Figure 5: Historical browsing sessions of various lengths</figcaption></figure>
 <p>We can frame the problem similarly for other use cases.</p>
 <h3 id="use-cases">Use Cases</h3>
 <p>This problem is well-aligned with emerging real-world use cases, in which modeling short-term preferences is highly desirable. Consider the following examples in music, rental, and product spaces.</p>
 <h4 id="music-recommendations">Music recommendations</h4>
 <p>Recommending additional content that a user might like while they browse through a list of songs can change a user’s experience on a content platform.</p>
 <p>The user’s listening queue follows a sequence. For each song the user has listened to in the past, we would want to identify the songs listened to directly before and after it, and use them to teach the machine learning model that those songs somehow belong to the same context. This allows us to find songs that are similar, and provide better recommendations.<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></p>
-<p>![Figure 6: Playlist](figures/FF19_Artboard 6.png)</p>
+<figure><img src="figures/FF19_Artboard_6.png" alt="Figure 6: Playlist"><figcaption>Figure 6: Playlist</figcaption></figure>
 <h4 id="rental-recommendations">Rental recommendations</h4>
 <p>Another powerful and useful application of session-based recommendation systems occurs in any type of online marketplace. For example, imagine a website that contains millions of diverse rental listings, and a guest exploring them in search of a place to rent for a vacation.<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup> The machine learning model in such a situation should be able to leverage what the guest views during an ongoing search, and learn from these search sessions the similarities between the listings. The similarities learned by the model could potentially encode listing features, like location, price, amenities, design taste, and architecture.</p>
-<p>![Figure 7: Rental listings](figures/FF19_Artboard 7.png)</p>
+<figure><img src="figures/FF19_Artboard_7.png" alt="Figure 7: Rental listings"><figcaption>Figure 7: Rental listings</figcaption></figure>
 <h4 id="product-recommendations">Product recommendations</h4>
 <p>Leveraging emails in the forms of promotions and purchase receipts to recommend the next item to be purchased has also proven to be a strong purchase intent signal.<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup> Again, the idea here is to learn a representation of products from historical sequences of product purchases, under the assumption that products with similar contexts (that is, surrounding purchases) can help recommend more meaningful and diverse suggestions for the next product a user might want to purchase.</p>
-<p>![Figure 8: Email purchase receipts](figures/FF19_Artboard 8.png)</p>
+<figure><img src="figures/FF19_Artboard_8.png" alt="Figure 8: Email purchase receipts"><figcaption>Figure 8: Email purchase receipts</figcaption></figure>
 <p>With these examples in mind, let’s dig deeper into what it takes to design and build a session-based recommendation system for product recommendations, in the context of an online retail website</p>
 <h2 id="modeling-session-based-recommenders">Modeling Session-based Recommenders</h2>
 <p>There are many baselines for the next event prediction (NEP) task. The simplest and most common are designed to recommend the item that most frequently co-occurs with the last item in the session. Known as “Association Rules,”<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup> this heuristic is straightforward, but doesn’t capture the complexity of the user’s session history.</p>
@@ -625,7 +625,7 @@ h2 {
 <p>Word2vec? Isn’t that the algorithm that made word embeddings commonplace? Yes! Word2vec uses the co-occurrence of words in a sentence to learn embeddings for each word that capture the semantic meaning of that word. At its core, word2vec is a simple, shallow neural network, with a single hidden layer. In its skip-gram version, it takes as input a word, and tries to predict the context of words around it as the output. For instance, consider this sentence:</p>
 <p>“The cat <em><strong>jumped</strong></em> over the puddle.”<sup class="footnote-ref"><a href="#fn8" id="fnref8">[8]</a></sup></p>
 <p>Given the central word “jumped,” the model will be able to predict the surrounding words: “The,” “cat,” “over,” “the,” “puddle.”</p>
-<p>![Figure 9: Word2vec versions: Skip-Gram vs Continuous Bag of Words](figures/FF19_Artboard 9.png)</p>
+<figure><img src="figures/FF19_Artboard_9.png" alt="Figure 9: Word2vec versions: Skip-Gram vs Continuous Bag of Words"><figcaption>Figure 9: Word2vec versions: Skip-Gram vs Continuous Bag of Words</figcaption></figure>
 <p>Another approach—Continuous Bag of Words (CBOW)—treats the words “The,” “cat,” “over,” “the,” and “puddle” as the context, and predicts the center word: “jumped.” For the rest of this report, we will restrict ourselves to the skip-gram model. The Ws in the above diagram represent the weight matrices that control the weight of the successive transformations we apply to the input to get the output. Training this shallow network means learning the values of these weight matrices, which gives us the output that is closest to the training data. Once trained, the output layer is usually discarded, and the hidden layer (also known as the embeddings) is used for downstream processes. These embeddings are nothing but vector representations of each word, such that similar words have vector representations that are close together in the embedding space.</p>
 <h3 id="how-can-we-use-this-for-nep%3F">How can we use this for NEP?</h3>
 <p>Let’s take another look at Rhonda’s browsing history. We can treat each session as a sentence, with each item or product in the session representing a “word.” A website’s collection of user browser histories (including Rhonda’s) will act as the corpus.   Word2vec will crunch over the entire corpus, learning relationships between products in the context of user browsing behavior. The result will be a collection of embeddings: one for each product. The idea is that these learned product embeddings will contain more information than a simple heuristic, and training the word2vec algorithm is typically faster and easier than training more complex, data-hungry deep learning algorithms.</p>
@@ -664,16 +664,16 @@ h2 {
 <p>In NEP, we consider a user’s history to recommend items for the future—but, when training models for recommendation, all the data is historical. In order to mimic “real life” behavior, we’ll pretend that we only have access to the user’s first <em>n</em>-1 purchased items, and use those to try to predict the <em>n</em>th item purchased.</p>
 <p>To visualize this, let’s go back to Rhonda’s historical browsing information, collected while she was using our site. We’ll use the highlighted items as our training set to learn product representations, which will be used to generate recommendations. Recommendations are typically based on the most recent interaction by the user, called the <strong>query item</strong>. In this case, we’ll treat the last item (“cap” in our highlighted set of items below) as the query item, and use that to generate a set of recommendations.</p>
 <p>The item outside of the highlighted box (in this case, a “water bottle”) will be the ground truth item, and we’ll then check whether this item is contained within our generated recommendations.</p>
-<p>![Figure 12: Rhonda’s session, wherein the first <em>n</em>-1 items highlighted in a green box act as part of the training set, while the item outside is used as ground truth for the recommendations generated.](figures/FF19_Artboard 10.png)</p>
+<figure><img src="figures/FF19_Artboard_10.png" alt="Figure 12: Rhonda’s session, wherein the first n-1 items highlighted in a green box act as part of the training set, while the item outside is used as ground truth for the recommendations generated."><figcaption>Figure 12: Rhonda’s session, wherein the first <em>n</em>-1 items highlighted in a green box act as part of the training set, while the item outside is used as ground truth for the recommendations generated.</figcaption></figure>
 <p>To put it more concretely: for each customer in the Online Retail Data Set, we construct the training set from the first n-1 purchased items. We construct test and validation sets as a series of [query item, ground truth item] pairs. The test and validation sets must be disjoint—that is, each set is composed of pairs with no pairs shared between the two sets (or else we would leak information from our validation into the final test set!).</p>
 <p>With this in mind, there is one more preprocessing step that we must apply to our dataset. Namely, we remove sessions that contain fewer than three purchased items. A session with only two, for example, is just a [query item, ground truth item] pair and does not give us any examples for training.</p>
 <p>Once we have our train/test/validation sets constructed, it’s time to train! Training <a href="https://radimrehurek.com/gensim/">Gensim</a>’s word2vec is a one-liner. (For the uninitiated, Gensim is an open-source natural language processing library for training vector embeddings.) We simply pass it the training set and two very important parameters: <code>min_count</code> and <code>sg</code>. <code>min_count</code> is the minimum number of times a word in the vocabulary must be present for word2vec to create an embedding for it. Because we have some rare products, we set this to 1, so that all product IDs in the training set have an embedding. (<code>sg</code> is short for skip-gram, and setting this equal to 1 causes word2vec to use this architecture, as opposed to CBOW.)</p>
 <p>Under the hood, word2vec will construct a “vocabulary,” a collection of all unique product IDs, and then learn an embedding for each. Once trained, we can extract the product ID embeddings.</p>
 <p>[missing code snippet]</p>
 <p>Next, we need to generate recommendations. Given a query item, we’ll generate a handful of recommendations that are the most similar to that item, using cosine similarity. This is the same technique we would use if we wanted to find similar words. Instead of semantic similarity between words, we hope we have learned embeddings that capture the semantic similarity between product IDs that users purchased. Thus, we’ll look for other product IDs that are “most similar” to the query item.</p>
-<p>![Figure 13:  The query item (the last item in a training sequence) is used to generate K product recommendations](figures/FF19_Artboard 11.png)</p>
+<figure><img src="figures/FF19_Artboard_11.png" alt="Figure 13:  The query item (the last item in a training sequence) is used to generate K product recommendations"><figcaption>Figure 13:  The query item (the last item in a training sequence) is used to generate K product recommendations</figcaption></figure>
 <p>Armed with a list of recommendations, we can now score our model by checking whether the corresponding ground truth item is in our list of recommendations.</p>
-<p>![Figure 14: The user’s actual next selection (the final item in the user’s sequence) is considered the ground truth item, and we check whether that item is found in our list of generated recommendations.](figures/FF19_Artboard 12.png)</p>
+<figure><img src="figures/FF19_Artboard_12.png" alt="Figure 14: The user’s actual next selection (the final item in the user’s sequence) is considered the ground truth item, and we check whether that item is found in our list of generated recommendations."><figcaption>Figure 14: The user’s actual next selection (the final item in the user’s sequence) is considered the ground truth item, and we check whether that item is found in our list of generated recommendations.</figcaption></figure>
 <p>We’ll perform this set of operations for each [query item, ground truth item] pair in our test set, to compute an overall score using Recall@<em>K</em> and MRR@<em>K</em>. The output of the code snippet above resulted in a Recall@10 of 19.7 and MRR@10 of 0.108. These results tell us that nearly 20% of the time, the user’s true selection was included in the list of recommendations we generated, and that its rank in that list was, on average, about 9th out of 10 recommendations. (1/x = 0.108 → x =  9.25)</p>
 <h3 id="hyperparameters-matter">Hyperparameters Matter</h3>
 <p>In the previous section, we simply trained word2vec using the default hyperparameters. But hyperparameters matter! In addition to the learning rate or the embedding size— hyperparameters likely familiar to many—word2vec has several others which have considerable impact on the resulting embeddings. Let’s see how.</p>
@@ -686,12 +686,47 @@ h2 {
 <h4 id="number-of-negative-samples">Number of negative samples</h4>
 <p>In addition to the negative sampling exponent, another hyperparameter determines how many <strong>negative samples</strong> are provided for each positive example. That is, when showing the model [“jumped”, “cat”] (our positive sample), we could include one, five, or maybe even fifty different negative samples.</p>
 <p>The code snippet displayed above uses the default values for each of these hyperparameters. These values were found to produce semantically meaningful representations for words in documents, but we are learning embeddings for products in online sessions. The order of products in online sessions will not have the same structure as words in sentences, so we’ll need to consider adjusting word2vec’s hyperparameters to be more appropriate to the task.</p>
-<p>| Hyperparameter | Start Value | End Value | Step Size | Configurations |
-| ------------- | ------------- |
-| Context window size | 1 | 19 | 3 | 7 |
-| Negative sampling exponent | -1 | 1 | 0.2 | 11 |
-| Number of negative samples | 1 | 19 | 3 | 7 |
-| <strong>Number of Trials</strong> |  |  |  | 539 |</p>
+<div style="width: 100%; overflow-x: auto;"><table>
+<thead>
+<tr>
+<th>Hyperparameter</th>
+<th>Start Value</th>
+<th>End Value</th>
+<th>Step Size</th>
+<th>Configurations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Context window size</td>
+<td>1</td>
+<td>19</td>
+<td>3</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Negative sampling exponent</td>
+<td>-1</td>
+<td>1</td>
+<td>0.2</td>
+<td>11</td>
+</tr>
+<tr>
+<td>Number of negative samples</td>
+<td>1</td>
+<td>19</td>
+<td>3</td>
+<td>7</td>
+</tr>
+<tr>
+<td><strong>Number of Trials</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>539</td>
+</tr>
+</tbody>
+</table></div>
 <p>#####[Table 1: This table shows the main hyperpar
 ameters we tuned over. For each one, we show the starting and ending values we tried, along with the step size we used. The total number of trials is computed by multiplying each value in the Configurations column.]</p>
 <p>Above, we detail the hyperparameters we considered, the values we allowed these hyperparameters to assume, and the total number of trials necessary to test them all in a sweep. If we want to find the best hyperparameters for our dataset, we’ll need to do quite a bit of training—more than 500 different hyperparameter combinations!  We <em>could</em> set up our own code, constructing several nested loops to cover all of the possible parameters—or perhaps we could use sklearn’s GridSearch. However, there’s an even better solution.</p>

@@ -14,11 +14,9 @@ In reality, this means that our model might generate a handful of recommendation
 
 ![Figure 5: Historical browsing sessions of various lengths](figures/FF19_Artboard_5.png)
 
-We can frame the problem similarly for other use cases.
-
 ### Use Cases
 
-This problem is well-aligned with emerging real-world use cases, in which modeling short-term preferences is highly desirable. Consider the following examples in music, rental, and product spaces.
+This problem is well-aligned with emerging real-world use cases, in which modeling short-term preferences is highly desirable. Consider the following examples in music, rental, and product spaces.^[Adopted from the blogpost - [Applying word2vec to Recommenders and Advertising](https://mccormickml.com/2018/06/15/applying-word2vec-to-recommenders-and-advertising/)]
 
 #### Music recommendations
 Recommending additional content that a user might like while they browse through a list of songs can change a user’s experience on a content platform.
