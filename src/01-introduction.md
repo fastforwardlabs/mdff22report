@@ -25,7 +25,7 @@ Choices almost always have time-sensitive context; for instance, “recently vie
 These considerations have prompted the exploration and development of a new type of recommendation system: known as **session-based recommendation systems**, these systems rely heavily on the user’s most recent interactions, rather than on the user’s historical preferences. This is especially advantageous because a user _could_ appear anonymously—that is, a user may not be logged in or may be browsing incognito.  
 
 ### Why now?
-While nearly unknown as of just a few years ago, session-based recommenders have grown quickly in popularity, and for several reasons. First, this method can be implemented _even in the absence of historical user data_, and doesn’t explicitly rely on user population statistics. This is helpful because users aren’t always logged in when they browse a website, which makes session-based recommenders highly relevant.^[Empirical Analysis of Session-Based Recommendation Algorithms(https://arxiv.org/abs/1910.12781)]
+While nearly unknown as of just a few years ago, session-based recommenders have grown quickly in popularity, and for several reasons. First, this method can be implemented _even in the absence of historical user data_, and doesn’t explicitly rely on user population statistics. This is helpful because users aren’t always logged in when they browse a website, which makes session-based recommenders highly relevant.^[[Empirical Analysis of Session-Based Recommendation Algorithms](https://arxiv.org/abs/1910.12781)]
 
 Second, a wealth of new, publicly available, session-centric datasets have been released, especially in the e-commerce domain, allowing for model development and research in this area.
 
