@@ -5,7 +5,7 @@ Being able to recommend an item of interest to a user, based on their past prefe
 ## Introduction
 Recommendation systems have become a cornerstone of modern life, spanning sectors that include online retail, music and video streaming, and even content publishing. These systems help us navigate the sheer volume of content on the internet, allowing us to discover what’s interesting or important to us. When implemented correctly, recommendation systems help us navigate efficiently and make more informed decisions. 
 
-![Figure 1: The sheer amount of items available online make recommendation systems necessary](figures/FF19_Artboard 1.png)
+![Figure 1: The sheer amount of items available online make recommendation systems necessary](figures/FF19_Artboard_1.png)
 
 While this report is not comprehensive, we will touch on a variety of approaches to recommendation systems, and dig deep into one approach in particular. We’ll demonstrate how we used that approach to build a recommendation system from the ground up for an e-commerce use case, and showcase our experimental findings. Finally, we’ll also talk about many of the considerations necessary to building thoughtful, information-driven recommendation systems.
 
@@ -14,13 +14,13 @@ Recommendation systems are not new, and they have already achieved great success
 
 At a high level, content-based filtering makes recommendations based on user preferences for product features, as identified through either the user's previous actions or explicit feedback. Collaborative filtering, on the other hand, utilizes user-item interactions across a _population_ of users in order to make recommendations for one particular user, based on the preferences of other, very similar users (where similar users are identified by the items they have liked, read, bought, watched, etc.). These systems generally tend to utilize historical user-item interactions (i.e., the items that a user has clicked on in the past) to learn a user’s long-term preferences. 
 
-![Figure 2: content-based vs collaborative filtering approaches](figures/FF19_Artboard 2.png)
+![Figure 2: content-based vs collaborative filtering approaches](figures/FF19_Artboard_2.png)
 
 The underlying assumption in both of these systems is that all of the historical interactions are equally important to the user’s current preference—but in reality, this may not be true. A user’s choice of items not only depends not only on long-term historical preference, but also on short-term and more recent preferences. 
 
 Choices almost always have time-sensitive context; for instance, “recently viewed” or “recently purchased” items may actually be more relevant than others. These short-term preferences are embedded in the user’s most recent interactions, but may account for only a small proportion of historical interactions. In addition, a user’s preference towards certain items can tend to be dynamic rather than static; it often evolves over time. 
 
-![Figure 3: A user’s preference can change over time](figures/FF19_Artboard 3.png)
+![Figure 3: A user’s preference can change over time](figures/FF19_Artboard_3.png)
 
 These considerations have prompted the exploration and development of a new type of recommendation system: known as **session-based recommendation systems**, these systems rely heavily on the user’s most recent interactions, rather than on the user’s historical preferences. This is especially advantageous because a user _could_ appear anonymously—that is, a user may not be logged in or may be browsing incognito.  
 
