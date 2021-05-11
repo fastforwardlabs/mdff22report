@@ -7,11 +7,11 @@ We chose an open domain e-commerce dataset^[[https://www.kaggle.com/vijayuv/onli
 
 In this case, we define a session as a customer’s full purchase history (all items purchased in each transaction) over the life of the dataset. Below, we show a boxplot of the session lengths (how many items were purchased by each customer). The median customer purchased 44 products over the course of the dataset, while the average customer purchased 96 products. 
 
-![Figure 10: Session length in the Online Retail Data Set]
+![Figure 10: Session length in the Online Retail Data Set](figures/session_lengths.png)
 
 Another thing to note is the popularity of individual products. Below, we show the log counts of how often each product was purchased. Most products are not very popular and are only purchased a handful of times. On the other hand, a few products are wildly popular and purchased thousands of times.
 
-![Figure 11: Log counts of each product in the Online Retail dataset]
+![Figure 11: Log counts of each product in the Online Retail dataset](figures/product_counts_arrow.png)
 
 This dataset has already been preprocessed (e.g., personally identifying information has already been removed.) The only additional preprocessing we performed was to remove entries that did not contain a customer ID number (which is how we define a session).  
 
@@ -87,7 +87,7 @@ We trained a word2vec model using the best hyperparameters found above, which re
 #### Hyperparameter Optimization Results  
 For this dataset, there is actually a wide range of values that would work well for this task. In the following figures, we plot the Recall@10 score for each  hyperparameter configuration we tested. Because we tuned over three hyperparameters, we display three figures showing the relationship between pairs of hyperparameters. Essentially, we’ve flattened a 3D space into two dimensions for readability. This means that, for the flattened dimension, we averaged over the Recall@10 scores.  For example, in the left-most figure we plot the *number of negative samples* against the *negative sampling exponent*. We average over the Recall@10 scores in the context window dimension, which are the colored points you see in the 2D figure, where yellow indicates a high Recall@10 score and purple is a low score.
 
-![Figure 15: Results from our hyperparameter sweep: Each panel shows the Recall@10 scores (colored points, where yellow is a high score, and purple is a low score) associated with a unique configuration of hyperparameters. The best hyperparameter values for the Online Retail Data Set are denoted by the light blue circle. Word2vec’s default values are shown by the orange star.  In all cases, the orange star is nowhere near the light blue circle, indicating that the default values are not optimal for this dataset.](figures/------------)
+![Figure 15: Results from our hyperparameter sweep: Each panel shows the Recall@10 scores (colored points, where yellow is a high score, and purple is a low score) associated with a unique configuration of hyperparameters. The best hyperparameter values for the Online Retail Data Set are denoted by the light blue circle. Word2vec’s default values are shown by the orange star.  In all cases, the orange star is nowhere near the light blue circle, indicating that the default values are not optimal for this dataset.](figures/hpsweep_results.png)
 
 In each figure above, the orange star signifies the default word2vec values, and the light blue circle indicates the best hyperparameter configuration we found during our sweep. In all cases, the best hyperparameters are typically in the upper right quadrant; larger values of these hyperparameters perform better than smaller values for this dataset. And in each case, the default word2vec parameters are near, but outside of, the optimal range of values to maximise performance on Recall@10.  
 
@@ -98,7 +98,7 @@ Second is the number of negative samples. In the figure to the far right, we see
 #### Model Comparisons
 Now that we’ve learned the best hyperparameters for our dataset, we can start looking at some model comparisons. We trained models using both our best hyperparameters and the default hyperparameters, each for 100 epochs. The number of epochs is another important parameter, and the default in Gensim’s implementation is five. So we trained another default word2vec model with only five epochs. Finally, we’ve shown the “Association Rules” baseline, a simple heuristic that predicts recommendations based on frequent co-occurrence between items.
 
-![Figure 16: Model comparisons](figures/---------)
+![Figure 16: Model comparisons](figures/model_comparison.png)
 
 It should be no surprise that the best model is the one configured with the hyperparameters discovered during the tuning sweep—but it turns out the number of training epochs is just as crucial. 
 
@@ -108,7 +108,7 @@ With traditional neural networks, we set the number of epochs to minimize the tr
 
 We can see this effect in the figure below, where we plot word2vec’s training loss in grey and the Recall@10 score on the validation set in blue (since there is no validation loss in this case) as a function of training epochs. The Recall@10 score is completely decoupled from word2vec’s training loss and steadily increases over the course of training. By the end of the 100 epochs, this score has relatively flattened. We tried training for longer (200 epochs), but this didn’t significantly increase performance. 
 
-![Figure 17: Recall@10 score on the validation set as a function of epochs, where the dark line indicates the mean over 5 models trained on the same (best) hyperparameters, and the light shading is 1 std deviation.](figures/---------)
+![Figure 17: Recall@10 score on the validation set as a function of epochs, where the dark line indicates the mean over 5 models trained on the same (best) hyperparameters, and the light shading is 1 std deviation.](figures/loss_recall_vs_epochs.png)
 
 Of course, it’s still better to determine the best set of hyperparameters for the specific dataset you are working with; however, these results demonstrate that you can get far by simply increasing the number of training epochs. We estimate that the increase in training epochs accounts for up to 58% of the performance gains for our best word2vec  model (compared to the model trained on default values for only 5 epochs). This suggests that having ideal hyperparameters accounts for roughly 42% of the performance gains, which has performance implications of another kind: computational. Let’s look at some of the challenges of this method for session-based recommendations, starting with the computational cost. 
 
