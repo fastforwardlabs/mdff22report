@@ -2,6 +2,6 @@
 
 FF19 · _May 2021_
 
-![](figures/ff19-cover-splash.png)
+![](figures/ff19_cover_splash.png)
 
 [[TOC]]
