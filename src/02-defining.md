@@ -2,7 +2,7 @@
 
 Let’s say we own a popular online shopping website for workout accessories. Rhonda, a new customer, has been browsing tops, shoes, and weights. Her browsing history looks like this:
 
-![Figure 4:  Rhonda’s browsing history](figures/FF19_Artboard_4.png)
+![Figure 4:  Rhonda’s browsing history](figures/FF19_Artboard_4rev.png)
 
 What should we recommend to her next? Good recommendations increase the likelihood that Rhonda will see something she likes, click on it, and make a purchase. Poor recommendations will, at best, lead to no new revenue, but, even worse, could give her a negative customer experience. (You know this feeling: when a website keeps recommending something to you that you have already bought, or something that you’ve never really wanted, your impression of that website diminishes!) 
 
@@ -28,7 +28,7 @@ The user’s listening queue follows a sequence. For each song the user has list
 #### Rental recommendations
 Another powerful and useful application of session-based recommendation systems occurs in any type of online marketplace. For example, imagine a website that contains millions of diverse rental listings, and a guest exploring them in search of a place to rent for a vacation.^[[Listing Embeddings in Search Ranking](https://medium.com/airbnb-engineering/listing-embeddings-for-similar-listing-recommendations-and-real-time-personalization-in-search-601172f7603e)] The machine learning model in such a situation should be able to leverage what the guest views during an ongoing search, and learn from these search sessions the similarities between the listings. The similarities learned by the model could potentially encode listing features, like location, price, amenities, design taste, and architecture.
 
-![Figure 7: Rental listings](figures/FF19_Artboard_7.png)
+![Figure 7: Rental listings](figures/FF19_Artboard_7rev.png)
 
 #### Product recommendations
 Leveraging emails in the forms of promotions and purchase receipts to recommend the next item to be purchased has also proven to be a strong purchase intent signal.^[[E-commerce in Your Inbox:
