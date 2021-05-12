@@ -42,7 +42,7 @@ Armed with a list of recommendations, we can now score our model by checking whe
 
 ![Figure 14: The user’s actual next selection (the final item in the user’s sequence) is considered the ground truth item, and we check whether that item is found in our list of generated recommendations.](figures/FF19_Artboard_12.png)
 
-We’ll perform this set of operations for each [query item, ground truth item] pair in our test set, to compute an overall score using Recall@*K* and MRR@*K*. The output of the code snippet above resulted in a Recall@10 of 19.7 and MRR@10 of 0.108. These results tell us that nearly 20% of the time, the user’s true selection was included in the list of recommendations we generated, and that its rank in that list was, on average, about 9th out of 10 recommendations. (1/x = 0.108 → x =  9.25)
+We’ll perform this set of operations for each [query item, ground truth item] pair in our test set, to compute an overall score using Recall@*K* and MRR@*K*. The output of the code snippet above resulted in a Recall@10 of 19.7 and MRR@10 of 0.108. These results tell us that nearly 20% of the time, the user’s true selection was included in the list of recommendations we generated. 
 
 ### Hyperparameters Matter
 In the previous section, we simply trained word2vec using the default hyperparameters. But hyperparameters matter! In addition to the learning rate or the embedding size— hyperparameters likely familiar to many—word2vec has several others which have considerable impact on the resulting embeddings. Let’s see how. 
