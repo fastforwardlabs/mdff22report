@@ -22,7 +22,7 @@ To visualize this, let’s go back to Rhonda’s historical browsing information
 
 The item outside of the highlighted box (in this case, a “water bottle”) will be the ground truth item, and we’ll then check whether this item is contained within our generated recommendations.
 
-![Figure 12: Rhonda’s session, wherein the first *n*-1 items highlighted in a green box act as part of the training set, while the item outside is used as ground truth for the recommendations generated.](figures/FF19_Artboard_10.png)
+![Figure 12: Rhonda’s session, wherein the first *n*-1 items highlighted in a green box act as part of the training set, while the item outside is used as ground truth for the recommendations generated.](figures/FF19_Artboard_10rev.png)
 
 To put it more concretely: for each customer in the Online Retail Data Set, we construct the training set from the first n-1 purchased items. We construct test and validation sets as a series of [query item, ground truth item] pairs. The test and validation sets must be disjoint—that is, each set is composed of pairs with no pairs shared between the two sets (or else we would leak information from our validation into the final test set!).
 
