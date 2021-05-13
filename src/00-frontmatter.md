@@ -1,4 +1,4 @@
-# Session-based Recommender Systems
+# Session-based Recommendation Systems
 
 FF19 · _May 2021_
 
