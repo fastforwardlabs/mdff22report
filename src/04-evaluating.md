@@ -10,8 +10,8 @@ For the purposes of this research report, we have employed withholding the last 
 ### Evaluation metrics
 When looking at time-ordered sequences of user interactions with the items, we split each sequence into train, validation, and test sets. For a sequence containing n interactions, we use the first (*n*-1) items in that sequence as part of the model training set.  We randomly sample (*n*-1th, *n*th) pairs from these sequences for the validation and test sets. For prediction, we use the last item in the training sequence (the *n*-1th item) as the query item, and predict the *K* closest items to the query item using cosine similarity between the vector representations. We can then evaluate with the following metrics: 
 
-* Recall at *K* (Recall@*K*) defined as the proportion of cases in which the ground truth item is among the top *K* recommendations for all test cases (that is, a test example is assigned a score of 1 if the *n*th item appears in the list, and 0 otherwise.)
+* **Recall at *K* (Recall@*K*)** defined as the proportion of cases in which the ground truth item is among the top *K* recommendations for all test cases (that is, a test example is assigned a score of 1 if the *n*th item appears in the list, and 0 otherwise).
 
-* Mean Reciprocal Rank (MRR@*K*), takes average on the reciprocal ranks of users’ desired items. This metric measures and favors higher ranks in the ordered list of recommendation results
+* **Mean Reciprocal Rank (MRR@*K*)**, takes average on the reciprocal ranks of users’ desired items. This metric measures and favors higher ranks in the ordered list of recommendation results.
 
 Accuracy, however, is not the only relevant factor when it comes to recommendations. Depending on the problem, we may want to measure how diverse the recommendations are, or if our algorithm generally tends to recommend most popular items. These additional quality metrics, known as coverage (or diversity) and popularity bias, could help us better understand the potential side-effects of the recommender model.
