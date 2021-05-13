@@ -582,8 +582,8 @@ function makeHead() {
 
 <meta property="og:title" content="${title}" />
 <meta property="og:description" content="${description}" />
-<meta property="og:image" content="https://session-based-recommendations.fastforwardlabs.com/figures/ff19-cover-splash.png" />
-<meta property="og:url" content="https://session-based-recommendations.fastforwardlabs.com" />
+<meta property="og:image" content="https://session-based-recommenders.fastforwardlabs.com/figures/ff19-cover-splash.png" />
+<meta property="og:url" content="https://session-based-recommenders.fastforwardlabs.com" />
 <meta name="twitter:card" content="summary_large_image" />
 
 <meta name="viewport" content="width=device-width" />
