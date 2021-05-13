@@ -14,7 +14,7 @@ Recommendation systems are not new, and they have already achieved great success
 
 At a high level, content-based filtering makes recommendations based on user preferences for product features, as identified through either the user's previous actions or explicit feedback. Collaborative filtering, on the other hand, utilizes user-item interactions across a _population_ of users in order to make recommendations for one particular user, based on the preferences of other, very similar users (where similar users are identified by the items they have liked, read, bought, watched, etc.). These systems generally tend to utilize historical user-item interactions (i.e., the items that a user has clicked on in the past) to learn a user’s long-term preferences. 
 
-![Figure 2: Content-based vs Collaborative filtering approaches](figures/FF19_Artboard_2.png)
+![Figure 2: Content-based vs Collaborative filtering approaches](figures/FF19_Artboard_2rev.png)
 
 The underlying assumption in both of these systems is that all of the historical interactions are equally important to the user’s current preference—but in reality, this may not be true. A user’s choice of items not only depends on long-term historical preference, but also on short-term and more recent preferences. 
 
