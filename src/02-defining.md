@@ -4,7 +4,7 @@ Let’s say we own a popular online shopping website for workout accessories. Rh
 
 ![Figure 4:  Rhonda’s browsing history](figures/FF19_Artboard_4rev.png)
 
-What should we recommend to her next? Good recommendations increase the likelihood that Rhonda will see something she likes, click on it, and make a purchase. Poor recommendations will, at best, lead to no new revenue, but, even worse, could give her a negative customer experience. (You know this feeling: when a website keeps recommending something to you that you have already bought, or something that you’ve never really wanted, your impression of that website diminishes!) 
+What should we recommend to her next? Good recommendations increase the likelihood that Rhonda will see something she likes, click on it, and make a purchase. Poor recommendations will, at best, lead to no new revenue, but-even worse-could give her a negative customer experience. (You know this feeling: when a website keeps recommending something to you that you have already bought, or something that you’ve never really wanted, your impression of that website diminishes!) 
 
 We’ll consider Rhonda’s recent browsing history as a “session.” Formally, a session is composed of multiple user interactions that happen together in a continuous period of time—for instance, products purchased in a single transaction. Sessions can occur on the same day, or across several days, weeks, or months. 
 
@@ -16,7 +16,7 @@ In reality, this means that our model might generate a handful of recommendation
 
 ### Use Cases
 
-This problem is well-aligned with emerging real-world use cases, in which modeling short-term preferences is highly desirable. Consider the following examples in music, rental, and product spaces.^[Adopted from the blogpost - [Applying word2vec to Recommenders and Advertising](https://mccormickml.com/2018/06/15/applying-word2vec-to-recommenders-and-advertising/)]
+This problem is well-aligned with emerging real-world use cases, in which modeling short-term preferences is highly desirable. Consider the following examples in music, rental, and product spaces.^[Adopted from [Applying word2vec to Recommenders and Advertising](https://mccormickml.com/2018/06/15/applying-word2vec-to-recommenders-and-advertising/)]
 
 #### Music recommendations
 Recommending additional content that a user might like while they browse through a list of songs can change a user’s experience on a content platform.
@@ -26,7 +26,7 @@ The user’s listening queue follows a sequence. For each song the user has list
 ![Figure 6: Playlist](figures/FF19_Artboard_6rev.png)
 
 #### Rental recommendations
-Another powerful and useful application of session-based recommendation systems occurs in any type of online marketplace. For example, imagine a website that contains millions of diverse rental listings, and a guest exploring them in search of a place to rent for a vacation.^[[Listing Embeddings in Search Ranking](https://medium.com/airbnb-engineering/listing-embeddings-for-similar-listing-recommendations-and-real-time-personalization-in-search-601172f7603e)] The machine learning model in such a situation should be able to leverage what the guest views during an ongoing search, and learn from these search sessions the similarities between the listings. The similarities learned by the model could potentially encode listing features, like location, price, amenities, design taste, and architecture.
+Another powerful and useful application of session-based recommendation systems occurs in any type of online marketplace. For example, imagine a website that contains millions of diverse rental listings, and a guest exploring them in search of a place to rent for a vacation.^[[Listing Embeddings in Search Ranking](https://medium.com/airbnb-engineering/listing-embeddings-for-similar-listing-recommendations-and-real-time-personalization-in-search-601172f7603e)] The machine learning model in such a situation should be able to leverage what the guest views during an ongoing search, and learn from these search sessions the similarities between the listings. The similarities learned by the model could potentially encode listing features-like location, price, amenities, design taste, and architecture.
 
 ![Figure 7: Rental listings](figures/FF19_Artboard_7rev.png)
 
