@@ -10,7 +10,7 @@ Sessions can also be ordered or unordered, meaning that the user's interactions 
 Another big challenge for session-based recommenders is how to effectively learn from different actions by the user (for instance, how to differentiate between a user’s browsing activity and their purchase activity). Should the session contain only the items that were clicked on? Or should the various actions be combined? If so, how does one model such complex dependencies?
 
 ### What determines a good recommendation?
-Different recommendation strategies and approaches lead to different recommendations. Defining “good” recommendations is challenging because this depends so highly on the use case. For example, simple baselines use pure co-occurrence between items to generate recommendations, but this might not help a user discover new or lesser known items that might be of interest to them. Additionally, an emphasis on popularity can lead to recommendations that are not diverse.
+Different recommendation strategies and approaches lead to different recommendations. Defining “good” recommendations is challenging because this depends so highly on the use case. For instance, simple baselines use pure co-occurrence between items to generate recommendations, but this might not help a user discover new or lesser known items that might be of interest to them. Additionally, an emphasis on popularity can lead to recommendations that are not diverse.
 
 This is highly relevant in regard to music recommendations. At times, a user may be in the mood to listen to the “most popular” songs, but at other times they are looking to discover something new, in which case popularity-based recommendations are likely not helpful.
 
