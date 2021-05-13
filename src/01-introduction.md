@@ -1,14 +1,12 @@
 ## Introduction
 
-Being able to recommend an item of interest to a user (based on their past preferences) is a highly relevant problem in practice. A key trend over the past few years has been session-based recommendation algorithms that provide recommendations solely based on a user’s interactions in an ongoing session, and which do not require the existence of user profiles or their entire historical preferences. This report explores a simple, yet powerful, NLP-based approach (word2vec) to recommend a next item to a user. While NLP-based approaches are generally employed for linguistic tasks, here we exploit them to learn the structure induced by a user’s behavior or an item’s nature. 
-
 Recommendation systems have become a cornerstone of modern life, spanning sectors that include online retail, music and video streaming, and even content publishing. These systems help us navigate the sheer volume of content on the internet, allowing us to discover what’s interesting or important to us. When implemented correctly, recommendation systems help us navigate efficiently and make more informed decisions. 
 
 ![Figure 1: The sheer amount of items available online make recommendation systems necessary](figures/FF19_Artboard_1.png)
 
 While this report is not comprehensive, we will touch on a variety of approaches to recommendation systems, and dig deep into one approach in particular. We’ll demonstrate how we used that approach to build a recommendation system from the ground up for an e-commerce use case, and showcase our experimental findings. Finally, we’ll also talk about many of the considerations necessary to building thoughtful, information-driven recommendation systems.
 
-### Session-Based Recommendation Systems
+### Session-Based Recommender Systems
 Recommendation systems are not new, and they have already achieved great success over the past ten years through a variety of approaches. These classic recommendation systems can be broadly categorized as content-based, as collaborative filtering-based, or as hybrid approaches that combine aspects of the two.
 
 At a high level, content-based filtering makes recommendations based on user preferences for product features, as identified through either the user's previous actions or explicit feedback. Collaborative filtering, on the other hand, utilizes user-item interactions across a _population_ of users in order to make recommendations for one particular user, based on the preferences of other, very similar users (where similar users are identified by the items they have liked, read, bought, watched, etc.). These systems generally tend to utilize historical user-item interactions (i.e., the items that a user has clicked on in the past) to learn a user’s long-term preferences. 
