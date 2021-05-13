@@ -36,4 +36,4 @@ Product Recommendations at Scale](https://arxiv.org/pdf/1606.07154.pdf) (PDF)] A
 
 ![Figure 8: Email purchase receipts](figures/FF19_Artboard_8rev.png)
 
-With these examples in mind, let’s dig deeper into what it takes to design and build a session-based recommendation system for product recommendations, in the context of an online retail website
+With these examples in mind, let’s dig deeper into what it takes to design and build a session-based recommendation system for product recommendations, in the context of an online retail website.
