@@ -23,7 +23,7 @@ Recommending additional content that a user might like while they browse through
 
 The user’s listening queue follows a sequence. For each song the user has listened to in the past, we would want to identify the songs listened to directly before and after it, and use them to teach the machine learning model that those songs somehow belong to the same context. This allows us to find songs that are similar, and provide better recommendations.^[[Using Word2vec for Music Recommendations](https://towardsdatascience.com/using-word2vec-for-music-recommendations-bb9649ac2484)]
 
-![Figure 6: Playlist](figures/FF19_Artboard_6.png)
+![Figure 6: Playlist](figures/FF19_Artboard_6rev.png)
 
 #### Rental recommendations
 Another powerful and useful application of session-based recommendation systems occurs in any type of online marketplace. For example, imagine a website that contains millions of diverse rental listings, and a guest exploring them in search of a place to rent for a vacation.^[[Listing Embeddings in Search Ranking](https://medium.com/airbnb-engineering/listing-embeddings-for-similar-listing-recommendations-and-real-time-personalization-in-search-601172f7603e)] The machine learning model in such a situation should be able to leverage what the guest views during an ongoing search, and learn from these search sessions the similarities between the listings. The similarities learned by the model could potentially encode listing features, like location, price, amenities, design taste, and architecture.
@@ -34,6 +34,6 @@ Another powerful and useful application of session-based recommendation systems 
 Leveraging emails in the forms of promotions and purchase receipts to recommend the next item to be purchased has also proven to be a strong purchase intent signal.^[[E-commerce in Your Inbox:
 Product Recommendations at Scale](https://arxiv.org/pdf/1606.07154.pdf) (PDF)] Again, the idea here is to learn a representation of products from historical sequences of product purchases, under the assumption that products with similar contexts (that is, surrounding purchases) can help recommend more meaningful and diverse suggestions for the next product a user might want to purchase.
 
-![Figure 8: Email purchase receipts](figures/FF19_Artboard_8.png)
+![Figure 8: Email purchase receipts](figures/FF19_Artboard_8rev.png)
 
 With these examples in mind, let’s dig deeper into what it takes to design and build a session-based recommendation system for product recommendations, in the context of an online retail website
