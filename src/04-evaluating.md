@@ -12,6 +12,6 @@ When looking at time-ordered sequences of user interactions with the items, we s
 
 * **Recall at *K* (Recall@*K*)** defined as the proportion of cases in which the ground truth item is among the top *K* recommendations for all test cases (that is, a test example is assigned a score of 1 if the *n*th item appears in the list, and 0 otherwise).
 
-* **Mean Reciprocal Rank (MRR@*K*)**, takes average on the reciprocal ranks of users’ desired items. This metric measures and favors higher ranks in the ordered list of recommendation results.
+* **Mean Reciprocal Rank (MRR@*K*)**, takes the average of the reciprocal ranks of the ground truth item in among the top *K* recommendations for all test cases (that is, if the *n*th item was second in the list it's reciprocal rank would be 1/2). This metric measures and favors higher ranks in the ordered list of recommendation results.
 
 Accuracy, however, is not the only relevant factor when it comes to recommendations. Depending on the problem, we may want to measure how diverse the recommendations are, or if our algorithm generally tends to recommend most popular items. These additional quality metrics, known as coverage (or diversity) and popularity bias, could help us better understand the potential side-effects of the recommender model.
