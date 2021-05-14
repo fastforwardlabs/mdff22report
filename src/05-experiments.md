@@ -3,7 +3,7 @@
 Let’s put this into practice, and see how to specifically use word2vec for next event prediction (NEP) in order to generate product recommendations. In keeping with our e-commerce example above (Rhonda’s online shopping), we’ve chosen an open source e-commerce dataset that lends itself well to this task. The discussion below details our strategy, experiments, and results (the code for which can be found on [our GitHub repo](https://github.com/fastforwardlabs/session_based_recommenders)).
 
 ### Data
-We chose an open domain e-commerce dataset^[[https://www.kaggle.com/vijayuv/onlineretail](https://www.kaggle.com/vijayuv/onlineretail)] from a UK-based online boutique selling specialty gifts. This dataset was collected between 12/01/2010 and 12/09/2011 and contains purchase histories for 4,372 customers and 3,684 unique products. These purchase histories record transactions for each customer and detail the items that were purchased in each transaction. This is a bit different from a browsing history, as it does not contain the order of items clicked while perusing the website; it only includes the items that were eventually purchased in each transaction. However, the transactions are ordered in time, so we can treat a customer’s full transaction history as a session. Instead of predicting recommendations for what a customer might click on next, we’ll be predicting recommendations for what that customer might actually *buy* next. Session definitions are flexible, and care must be taken in order to properly interpret the results (more on this in [Overall Considerations](#overall-considerations).  
+We chose an open domain e-commerce dataset^[[https://www.kaggle.com/vijayuv/onlineretail](https://www.kaggle.com/vijayuv/onlineretail)] from a UK-based online boutique selling specialty gifts. This dataset was collected between 12/01/2010 and 12/09/2011 and contains purchase histories for 4,372 customers and 3,684 unique products. These purchase histories record transactions for each customer and detail the items that were purchased in each transaction. This is a bit different from a browsing history, as it does not contain the order of items clicked while perusing the website; it only includes the items that were eventually purchased in each transaction. However, the transactions are ordered in time, so we can treat a customer’s full transaction history as a session. Instead of predicting recommendations for what a customer might click on next, we’ll be predicting recommendations for what that customer might actually *buy* next. Session definitions are flexible, and care must be taken in order to properly interpret the results (more on this in [Overall Considerations](#overall-considerations)).  
 
 In this case, we define a session as a customer’s full purchase history (all items purchased in each transaction) over the life of the dataset. Below, we show a boxplot of the session lengths (how many items were purchased by each customer). The median customer purchased 44 products over the course of the dataset, while the average customer purchased 96 products. 
 
@@ -32,7 +32,16 @@ Once we have our train/test/validation sets constructed, it’s time to train! T
 
 Under the hood, word2vec will construct a “vocabulary,” a collection of all unique product IDs, and then learn an embedding for each. Once trained, we can extract the product ID embeddings.
 
-![](figures/code_snippet.png)
+```python
+
+sessions = load_ecomm()
+train, test, valid = train_test_split(sessions, test_size=1000)
+model = Word2Vec(train, min_count=1, sg=1)
+embeddings = model.wv
+print(recall_at_k(test, embeddings, k=10))
+print(mrr_at_k(test, embeddings, k=10))
+
+```
 
 Next, we need to generate recommendations. Given a query item, we’ll generate a handful of recommendations that are the most similar to that item, using cosine similarity. This is the same technique we would use if we wanted to find similar words. Instead of semantic similarity between words, we hope we have learned embeddings that capture the semantic similarity between product IDs that users purchased. Thus, we’ll look for other product IDs that are “most similar” to the query item.
 
@@ -69,8 +78,8 @@ The code snippet displayed above uses the default values for each of these hyper
 | Number of negative samples | 1 | 19 | 3 | 7 |
 | **Number of Trials** |  |  |  | 539 |
 
-![Table 1: This table shows the main hyperparameters we tuned over. For each one, we show the starting and ending values we tried, along with the 
-step size we used. The total number of trials is computed by multiplying each value in the Configurations column.]
+<figcaption>Table 1: This table shows the main hyperparameters we tuned over. For each one, we show the starting and ending values we tried, along with the step size we used. The total number of trials is computed by multiplying each value in the Configurations column.</figcaption><br/>
+
 
 Above, we detail the hyperparameters we considered, the values we allowed these hyperparameters to assume, and the total number of trials necessary to test them all in a sweep. If we want to find the best hyperparameters for our dataset, we’ll need to do quite a bit of training—more than 500 different hyperparameter combinations! We _could_ set up our own code, constructing several nested loops to cover all of the possible parameters—or perhaps we could use sklearn’s GridSearch. However, there’s an even better solution.
 
