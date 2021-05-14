@@ -84,7 +84,7 @@ The code snippet displayed above uses the default values for each of these hyper
 Above, we detail the hyperparameters we considered, the values we allowed these hyperparameters to assume, and the total number of trials necessary to test them all in a sweep. If we want to find the best hyperparameters for our dataset, we’ll need to do quite a bit of training—more than 500 different hyperparameter combinations! We _could_ set up our own code, constructing several nested loops to cover all of the possible parameters—or perhaps we could use sklearn’s GridSearch. However, there’s an even better solution.
 
 ### Hyperparameter Tuning with Ray
-There are several libraries that make hyperparameter optimization approachable, easy, and scalable (three things you won’t get by rolling your own or using sklearn’s GridSearch). For this cycle, we explored [Ray](https://docs.ray.io/en/master/index.html). 
+There are several libraries that make hyperparameter optimization approachable, easy, and *scalable*. For this cycle, we explored [Ray](https://docs.ray.io/en/master/index.html). 
 
 At its core, Ray is a simple, universal API for building distributed applications. Atop this foundation are a handful of libraries designed to address specific machine learning challenges. [Ray Tune](https://docs.ray.io/en/master/tune/index.html) provides several desirable features, including distributed hyperparameter sweep, checkpointing, and state-of-the-art hyperparameter search algorithms—all while supporting most major ML frameworks, such as PyTorch, Tensorflow, and Keras. 
 
