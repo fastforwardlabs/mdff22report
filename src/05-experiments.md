@@ -32,7 +32,7 @@ Once we have our train/test/validation sets constructed, it’s time to train! T
 
 Under the hood, word2vec will construct a “vocabulary,” a collection of all unique product IDs, and then learn an embedding for each. Once trained, we can extract the product ID embeddings.
 
-![](code_snippet.png)
+![](figures/code_snippet.png)
 
 Next, we need to generate recommendations. Given a query item, we’ll generate a handful of recommendations that are the most similar to that item, using cosine similarity. This is the same technique we would use if we wanted to find similar words. Instead of semantic similarity between words, we hope we have learned embeddings that capture the semantic similarity between product IDs that users purchased. Thus, we’ll look for other product IDs that are “most similar” to the query item.
 
