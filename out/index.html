@@ -548,7 +548,7 @@ h2 {
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-157475426-9', 'auto');
+  ga('create', 'G-VP14N95GGG', 'auto');
   ga('send', 'pageview');
 
   window.addEventListener('load', function() {
@@ -668,7 +668,7 @@ h2 {
 <p>With this in mind, there is one more preprocessing step that we must apply to our dataset. Namely, we remove sessions that contain fewer than three purchased items. A session with only two, for instance, is just a [query item, ground truth item] pair and does not give us any examples for training.</p>
 <p>Once we have our train/test/validation sets constructed, it’s time to train! Training <a href="https://radimrehurek.com/gensim/">Gensim</a>’s word2vec is a one-liner. (For the uninitiated, Gensim is an open-source natural language processing library for training vector embeddings.) We simply pass it the training set and two very important parameters: <code>min_count</code> and <code>sg</code>. <code>min_count</code> is the minimum number of times a word in the vocabulary must be present for word2vec to create an embedding for it. Because we have some rare products, we set this to 1, so that all product IDs in the training set have an embedding. (<code>sg</code> is short for skip-gram, and setting this equal to 1 causes word2vec to use this architecture, as opposed to CBOW.)</p>
 <p>Under the hood, word2vec will construct a “vocabulary,” a collection of all unique product IDs, and then learn an embedding for each. Once trained, we can extract the product ID embeddings.</p>
-<figure><img src="code_snippet.png" alt=""></figure>
+<figure><img src="figures/code_snippet.png" alt=""></figure>
 <p>Next, we need to generate recommendations. Given a query item, we’ll generate a handful of recommendations that are the most similar to that item, using cosine similarity. This is the same technique we would use if we wanted to find similar words. Instead of semantic similarity between words, we hope we have learned embeddings that capture the semantic similarity between product IDs that users purchased. Thus, we’ll look for other product IDs that are “most similar” to the query item.</p>
 <figure><img src="figures/FF19_Artboard_11.png" alt="Figure 13:  The query item (the last item in a training sequence) is used to generate K product recommendations"><figcaption>Figure 13:  The query item (the last item in a training sequence) is used to generate K product recommendations</figcaption></figure>
 <p>Armed with a list of recommendations, we can now score our model by checking whether the corresponding ground truth item is in our list of recommendations.</p>
