@@ -16,7 +16,7 @@ let margin = "0.5in";
       "html { font-size: 12px; line-height: 18px; } body { padding-left: 0; } .content { padding: 0; width: 100%; } .table-of-contents { position: relative; background: white; width: 100%; height: auto; page-break-before: always; font-size: 12px !important; line-heignt: 18px !important; } .table-of-contents a { text-decoration: underline; } #toc-header { display: none !important;  } figcaption { font-size: 10px; line-height: 18px; } #report-splash { display: none; } #explanation { display: none; } table { font-size: 8px; line-height: 12px; } #report-iso { display: block; margin-top: 160px; } #pdf-logo { display: block; } #html-logo { display: none !important; }",
   });
   await page.pdf({
-    path: "out/FF19-Session_Based_Recommender_Systems-Cloudera_Fast_Forward.pdf",
+    path: "out/FF22-Concept_Drift-Cloudera_Fast_Forward.pdf",
     height: "8.5in",
     width: "5.5in",
     displayHeaderFooter: false,

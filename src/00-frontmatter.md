@@ -1,11 +1,13 @@
-# Session-based Recommender Systems
+# Inferring Concept Drift Without Labeled Data
 
-FF19 · _May 2021_
+FF22 · _Aug 2021_
 
-![](figures/ff19_cover_splash.png)
+![](figures/ff22_cover_splash.png)
 
-*This is an applied research report by [Cloudera Fast Forward](https://www.cloudera.com/products/fast-forward-labs-research.html). We write reports about emerging technologies, and conduct experiments to explore what's possible. Read our full report on **Session-based Recommender Systems** below, or <a href="/FF19-Session_Based_Recommender_Systems-Cloudera_Fast_Forward.pdf" target="_blank" id="report-pdf-download">download the PDF</a>, and be sure to check out [our github repo](https://github.com/fastforwardlabs/session_based_recommenders) for the [Experiments](#Experiments) section.*
+*This is an applied research report by [Cloudera Fast Forward](https://www.cloudera.com/products/fast-forward-labs-research.html). We write reports about emerging technologies, 
+and conduct experiments to explore what's possible. Read our full report on **Concept Drift** below, or <a href="/FF22-Concept_Drift-Cloudera_Fast_Forward.pdf" target="_blank" id="report-pdf-download">download the PDF</a>, and be sure to check out [our github repo](https://github.com/fastforwardlabs/concept-drift) for the [Experiments](#Experiments) section.*
 
-*Being able to recommend an item of interest to a user (based on their past preferences) is a highly relevant problem in practice. A key trend over the past few years has been session-based recommendation algorithms that provide recommendations solely based on a user’s interactions in an ongoing session, and which do not require the existence of user profiles or their entire historical preferences. This report explores a simple, yet powerful, NLP-based approach (word2vec) to recommend a next item to a user. While NLP-based approaches are generally employed for linguistic tasks, here we exploit them to learn the structure induced by a user’s behavior or an item’s nature.*
+*After rigorous iterations of development and testing, deploying a well-fit machine learning model often feels like the final hurdle for an eager data science team. In practice however, a trained model is never final, and this milestone marks just the beginning of the perpetual maintenance race that is production machine learning. This is because most machine 
+learning models are static, but the world we live in is dynamic. More specifically, the ability of a trained model to generalize relies on an important assumption of stationarity - meaning the data upon which a model is trained and tested are independent and identically distributed (i.i.d). In real-world environments, this assumption is often violated as human behavior and consequently the systems we aim to model are dynamically changing all time.This report explores approaches for dealing with such dynamically changing environments through concept drift when labeled data is not readily accessible.*
 
 [[TOC]]

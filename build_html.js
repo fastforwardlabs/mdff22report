@@ -571,9 +571,9 @@ function makeJS() {
 }
 
 function makeHead() {
-  let title = 'Session-Based Recommender Systems'
+  let title = 'Inferring Concept Drift Without Labeled Data'
   let description =
-    'An online research report on session-based recommender systems by Cloudera Fast Forward Labs.'
+    'An online research report on concept drift by Cloudera Fast Forward Labs.'
   return `<head>
 <meta charset="utf-8" />
 
@@ -582,8 +582,8 @@ function makeHead() {
 
 <meta property="og:title" content="${title}" />
 <meta property="og:description" content="${description}" />
-<meta property="og:image" content="https://session-based-recommenders.fastforwardlabs.com/figures/ff19-cover-splash.png" />
-<meta property="og:url" content="https://session-based-recommenders.fastforwardlabs.com" />
+<meta property="og:image" content="https://concept-drift.fastforwardlabs.com/figures/ff19-cover-splash.png" />
+<meta property="og:url" content="https://concept-drift.fastforwardlabs.com" />
 <meta name="twitter:card" content="summary_large_image" />
 
 <meta name="viewport" content="width=device-width" />
@@ -606,7 +606,7 @@ ${makeJS()}
     document.getElementById('report-pdf-download').addEventListener('click', function() {
       ga('send', {
         hitType: 'pageview',
-        page: '//FF19-Session_Based_Recommender_Systems-Cloudera_Fast_Forward.pdf'
+        page: '//FF22-Concept_Drift-Cloudera_Fast_Forward.pdf'
       });
     });
   })
