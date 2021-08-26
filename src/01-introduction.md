@@ -1,6 +1,6 @@
 ## Introduction
 
-Recommendation systems have become a cornerstone of modern life, spanning sectors that include online retail, music and video streaming, and even content publishing. These systems help us navigate the sheer volume of content on the internet, allowing us to discover what’s interesting or important to us. When implemented correctly, recommendation systems help us navigate efficiently and make more informed decisions. 
+After iterations of development and testing, deploying a well-fit machine learning model often feels like the final hurdle for an eager data science team. In practice however, a trained model is never final, and this milestone marks just the beginning of the perpetual maintenance race that is production machine learning. This is because most machine learning models are static, but the world we live in is dynamic. More specifically, the ability of a trained model to generalize relies on an important assumption of stationarity - meaning the data upon which a model is trained and tested are independent and identically distributed (i.i.d). In real-world environments, this assumption is often violated as human behavior and consequently the systems we aim to model are dynamically changing all time. 
 
 ![Figure 1: The sheer amount of items available online make recommendation systems necessary](figures/FF19_Artboard_1.png)
 
