@@ -1,4 +1,11 @@
-## Defining the Session-based Recommender Problem Space 
+## Background
+
+### What is concept drift?
+
+Most machine learning systems today operate in a batch paradigm where they probe a historical data set to develop a model that reflects the world as it was at the time of training. But as we’ve seen, the world is always changing and the complex relationships that a model abstracts are also likely to change over time causing model performance to deteriorate if not accounted for. This phenomenon in which the statistical properties of a target domain change over time is considered concept drift.^[[Learning under Concept Drift: A Review](https://arxiv.org/pdf/2004.05785.pdf)]
+
+Formally, concept drift between time `$t$` and $$t+1$$ can be defined as
+
 
 Let’s say we own a popular online shopping website for workout accessories. Rhonda, a new customer, has been browsing tops, shoes, and weights. Her browsing history looks like this:
 
