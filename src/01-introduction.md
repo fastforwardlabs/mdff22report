@@ -8,6 +8,10 @@ Not all changes are this sudden though. Consider the task of maintaining an emai
 
 Or we can look at the job of forecasting energy consumption where historical demand is just one piece of the puzzle. In practice, future demand is driven by a slew of non-stationary forces like climate fluctuations, population growth, or disruptive clean energy tech that necessitate both gradual and sudden model adaptation.
 
+::: info
+Domain adaptation (a subcategory of transfer learning) is the ability to apply an algorithm trained in one or more “source domains” to a different, but related “target domain”. In domain adaptation, the source and target domains share the same feature space, but different distributions.^[[Domain adaptation](https://en.wikipedia.org/wiki/Domain_adaptation)]
+:::
+
 Changes in environmental conditions like these are referred to as _concept drift_ and will cause the predictive performance of a model to degrade over time, making it obsolete for the task it was initially intended to solve.
 ![Figure 2: Production model performance will decay over time without adapting to drifting concepts](figures/ff22-02.png)
 To combat this divergence between static models and dynamic environments, teams often adopt an adaptive learning strategy that is triggered by the detection of a drifting concept. Supervised drift detection is generally achieved by monitoring a performance metric of interest (such as accuracy) and alerting a retraining pipeline when the metric falls below some designated threshold.
