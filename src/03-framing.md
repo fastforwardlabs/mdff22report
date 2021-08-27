@@ -1,9 +1,9 @@
 ## Framing the problem
 
 With these definitions in mind, we see that real concept drift in a data stream (Source 2) poses the main concern for production models since it directly impacts model performance. The most effective solution to address this issue involves detecting when the learned relationship between features and targets is no longer appropriate for incoming data, and then training a new model to learn the novel concept. An adaptive workflow like this is shared among common supervised methods like Drift Detection Method (DDM), Early Drift Detection Method (EDDM), and ADaptive WINdowing (ADWIN), and is described in Figure 6 below.
-![Figure 6: General workflow of supervised drift detection methods that use significant changes in performance metrics to signal concept drift.](figures/ff22-06.png)
+![Figure 6: General workflow of supervised drift detection methods that use significant changes in performance metrics to signal concept drift.](figures/FF22-06.png)
 In general, these techniques monitor a task-dependent performance metric like accuracy, F-score, or precision/recall. If the metric of interest deviates from an acceptable level (as determined during training evaluation on the reference window), a drift is signaled. 
-![Figure 7: Impact of supervised concept drift detection on machine learning system performance over time.](figures/ff22-07.png)
+![Figure 7: Impact of supervised concept drift detection on machine learning system performance over time.](figures/FF22-07.png)
 The cumulative effect of this approach over the lifetime of a machine learning system is highlighted in Figure 7. Initially, the system celebrates strong performance because the model has learned from recent data. After some time, accuracy declines as concepts evolve until ultimately a metric threshold is crossed, and drift is detected. System performance then realizes an immediate boost after retraining as the new concept is absorbed.
 
 Despite the ample research and proven effectiveness of these supervised methods, they all suffer from a shared, impractical assumption － that true labels are instantaneously available after inference. In most use cases, the immediate availability of true labels is infeasible for several reasons.
