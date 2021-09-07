@@ -2,7 +2,7 @@
 
 ### What is concept drift?
 
-Most machine learning systems today operate in a batch paradigm; they probe an historical data set to develop a model that reflects the world as it was at the time of training. But, as we’ve seen, the world is always changing, and the complex relationships that a model abstracts are also likely to change over time - causing model performance to deteriorate, if not accounted for. This phenomenon in which the statistical properties of a target domain change over time is considered concept drift.^[[Learning under Concept Drift: A Review](https://arxiv.org/pdf/2004.05785.pdf)]
+Most machine learning systems today operate in a batch paradigm; they probe a historical data set to develop a model that reflects the world as it was at the time of training. But, as we’ve seen, the world is always changing, and the complex relationships that a model abstracts are also likely to change over time - causing model performance to deteriorate, if not accounted for. This phenomenon in which the statistical properties of a target domain change over time is considered concept drift.^[[Learning under Concept Drift: A Review](https://arxiv.org/pdf/2004.05785.pdf)]
 
 Formally, concept drift between time \\(t\\) and \\(t+1\\) can be defined as:
 
@@ -18,7 +18,7 @@ This decomposition yields two underlying sources of drift - _feature drift_ and 
 
 _Feature drift_ (also referred to as _covariate shift, feature change, input drift_) characterizes the scenario where the distribution of one or more input variables change over time (i.e., \\(P(X)\\) changes).
 
-![Figure 3: Forms of feature drift. The classification boundary depicted at time \\(t+1\\) represents the _previously learned relationship_ between features and targets at time \\(t\\). Colors represent ground truth classes of the data points at the specified time step.](figures/FF22-03.png)
+![Figure 3: Forms of feature drift. The classification boundary depicted at time \(t+1\) represents the _previously learned relationship_ between features and targets at time \(t\). Colors represent ground truth classes of the data points at the specified time step.](figures/FF22-03.png)
 
 This is seen in both Figure 3.a & 3.b above, where the distribution of features has changed from time \\(t\\). In Figure 3.a, feature drift has occurred in a region that directly affects the outcome of the learned classification boundary, causing model performance to decrease (and thus making it classified as both feature drift and real concept drift). However, feature drift can also occur where \\(P(X)\\) changes over time, but the changes do not affect the learned decision boundary. This describes a specific type of feature drift called _virtual drift_, as seen in Figure 3.b. This is an important distinction because, as we see here, only the changes in \\(P(X)\\) _that affect the prediction decision_ actually warrant a model adaptation.
 
@@ -32,7 +32,7 @@ Suppose now that, due to a shift in brand strategy, the company alters their pro
 
 The second source of drift, called _real concept drift_ (also commonly referred to as _actual drift, concept shift, conditional change_), refers to changes in \\(P(y|X)\\) and signals that a previously learned relationship between features and targets no longer holds true. Unlike feature drift, this type of drift will _always_ cause a drop in model performance.
 
-![Figure 4: Forms of real concept drift. The classification boundary depicted at time \\(t+1\\) represents the _newly learned relationship_ between features and targets at time \\(t+1\\). Colors represent ground truth classes of the data points at the specified time step.](figures/FF22-04.png)
+![Figure 4: Forms of real concept drift. The classification boundary depicted at time \(t+1\) represents the _newly learned relationship_ between features and targets at time \(t+1\). Colors represent ground truth classes of the data points at the specified time step.](figures/FF22-04.png)
 
 It’s important to note that real concept drift can happen either with or without a change in \\(P(X)\\).^[[A Survey on Concept Drift Adaptation](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/82cb2dbe-86a2-43d0-8ac2-fb2892295b48/A_Survey_on_Concept_Drift_Adaptation_2014.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210804%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210804T123525Z&X-Amz-Expires=86400&X-Amz-Signature=0e75f52b14a5448db13ddefc0c1825b9df11a4fab6577f10d632ae64bf317373&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22A%2520Survey%2520on%2520Concept%2520Drift%2520Adaptation%25202014.pdf%22)] This nuance is shown in Figure 4.a, where both the input feature distributions and the learned decision boundary have changed in the new time step. In contrast, Figure 4.b demonstrates a scenario where input distributions remain constant, while the ground truth class labels have actually evolved.
 
