@@ -26,7 +26,7 @@ This limitation arises because we’ve excluded the classifier from the detectio
 
 ### 2. Statistical test for change in response variable
 
-Unlike the previous method, where only the feature space is analyzed, our second approach infers concept drift by tacitly involving the classifier in the detection process, making the change detection process relevant to the prediction task at hand. To do so, we apply a model that's been trained on the reference window to generate predicted class probabilities (a response distribution) for observations in the detection window. Then, we use a _k_-fold procedure to obtain probability estimates for the reference window.
+Unlike the previous method, where only the feature space is analyzed, our second approach infers concept drift by tacitly involving the classifier in the detection process, making change detection relevant to the prediction task at hand. To do so, we apply a model that's been trained on the reference window to generate predicted class probabilities (a response distribution) for observations in the detection window. Then, we use a _k_-fold procedure to obtain probability estimates for the reference window.
 
 ::: info
 **_K-fold Procedure_**
@@ -50,13 +50,13 @@ To do so, we must introduce a parameter that specifies a desired _margin width_ 
 
 The impact of this approach is highlighted in Figure 10, above. On the left, we see the case where a divergence exists towards the tail ends of the distribution, but the rest of the probability space remains congruent. This example would fail the KS test (described in Method 2), signaling a feature drift, and consequently request costly new labels for retraining. However, because the divergence exists far from the decision boundary, it would _likely_ not have impacted the classification results, making it a false positive detection. In contrast, the margin density approach would tolerate this inconsequential change. Only when a statistically significant divergence occurs _inside_ the margin will Method 3 raise an alarm, as shown in Figure 10 (on the right).
 
-Introducing a margin of uncertainty to desensitize feature drift detection does help reduce the number of false positive detections. However, there is still room for improvement. Each method we have discussed so far relies on hypothesis testing to signal drift; unfortunately, the mere falsity of a null hypothesis doesn’t say much about our window samples, other than that they don’t come from an _identical_ population. But do we really care if the populations are identical?
+Introducing a margin of uncertainty to desensitize feature drift detection does help reduce the number of false positive detections. However, there is still room for improvement. Each method we have discussed so far relies on hypothesis testing to signal drift. Unfortunately, the mere falsity of a null hypothesis doesn’t say much about our window samples, other than that they don’t come from an _identical_ population. But do we really care if the populations are identical?
 
 If our goal is to reduce the sensitivity of feature drift detections, we probably care more about quantifying how different two populations are, which is something that a statistical test cannot provide. A quantitative measure of similarity affords us the flexibility to set our own threshold, depending on our tolerance for error. In essence, we need a way to distinguish what level of change is _statistically significant_ from what is _practically significant_.
 
 ### 4. Detect change in margin density of response distribution using a learned threshold
 
-Our final method uses a learned threshold to detect change in the margin density of a response distribution. Building upon the previous two methods, we first obtain a response distribution for each window ,and introduce a margin to classify predictions as in or out of the region of uncertainty. However, rather than applying a Chi-square test (as in Method 3), we establish an expected value for margin density based on the reference window.
+Our final method uses a learned threshold to detect change in the margin density of a response distribution. Building upon the previous two methods, we first obtain a response distribution for each window, and introduce a margin to classify predictions as in or out of the region of uncertainty. However, rather than applying a Chi-square test (as in Method 3), we establish an expected value for margin density based on the reference window.
 
 This is accomplished during the _k_-fold procedure by calculating the percentage of instances falling in margin, relative to the total instances in the window (i.e., margin density) for each fold. The cross-validation procedure produces a population of \\(k\\) margin density values from which we can calculate a mean (\\(MD_{ref}\\)) and standard deviation (\\(\sigma_{ref}\\)), providing a strong estimate of the expected margin density value and an acceptable deviation.
 
