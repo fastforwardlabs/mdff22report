@@ -582,7 +582,7 @@ function makeHead() {
 
 <meta property="og:title" content="${title}" />
 <meta property="og:description" content="${description}" />
-<meta property="og:image" content="https://concept-drift.fastforwardlabs.com/figures/ff22-cover-splash.png" />
+<meta property="og:image" content="https://concept-drift.fastforwardlabs.com/figures/FF22-cover.png" />
 <meta property="og:url" content="https://concept-drift.fastforwardlabs.com" />
 <meta name="twitter:card" content="summary_large_image" />
 
